@@ -56,10 +56,13 @@ class MainHandler(webapp2.RequestHandler):
             login_url = users.CreateLoginURL('/')
             greeting = '<a href="{}">Sign in</a>'.format(login_url)
 
-            self.response.write('Logged Out')
+            template = jinja_environment.get_template('home.html')
 
-            self.response.write(
-                '<br><html><body>{}</body></html>'.format(greeting))
+
+            self.response.write(template.render())
+
+            # self.response.write(
+            #     '<br><html><body>{}</body></html>'.format(greeting))
 
 
 
