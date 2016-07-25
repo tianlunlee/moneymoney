@@ -58,7 +58,7 @@ class MainHandler(webapp2.RequestHandler):
 
             template = jinja_environment.get_template('home.html')
 
-            template_vals = {'user':user, 'login_url':login}
+            template_vals = {'user':user, 'login_url':login_url}
             self.response.write(template.render(template_vals))
 
             # self.response.write(
