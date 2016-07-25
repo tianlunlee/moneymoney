@@ -8,6 +8,8 @@ handlers:
 - url: /favicon\.ico
   static_files: favicon.ico
   upload: favicon\.ico
+- url: /images
+  static_dir: images
 
 - url: /stylesheets #has to be above .* because .* reads if anything else
   static_dir: stylesheets #if anyone asks for stylesheets, go to static directory and get everything from there
