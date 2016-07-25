@@ -3,8 +3,44 @@
   <head>
     <meta charset="utf-8">
     <title></title>
+
+    <form action="/">
+      <p><a href="{{logout_url}}">Log Out </a></p>
+    </form>
+
   </head>
   <body>
+
+
+    <table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+  <!-- {% for student in students %} -->
+    <tr>
+
+      <td>
+        <!-- <a href="{{student.url()}}">
+          {{student.name}}
+        </a> -->
+      </td>
+
+      <!-- <td> {{student.university}} </td> -->
+
+        <!-- {% if student.team == 'r': %}
+          <td id="red"> </td>
+        {% elif student.team == 'b': %}
+          <td id="blue"> </td>
+        {% else: %}
+          <td id="yellow"> </td>
+        {% endif %} -->
+
+    </tr>
+  <!-- {% endfor %} -->
+</table>
+
 
   </body>
 </html>
