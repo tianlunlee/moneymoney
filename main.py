@@ -54,10 +54,12 @@ class MainHandler(webapp2.RequestHandler):
 
         else:
             login_url = users.CreateLoginURL('/')
+            greeting = '<a href="{}">Sign in</a>'.format(login_url)
 
             self.response.write('Logged Out')
 
-
+            self.response.write(
+                '<br><html><body>{}</body></html>'.format(greeting))
 
 
 
