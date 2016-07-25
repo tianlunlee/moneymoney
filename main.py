@@ -17,8 +17,21 @@ class User(ndb.Model):
 
     # university = ndb.StringProperty()
     # university_key = ndb.KeyProperty(kind=University)
-class CurrentBudget(ndb.Model):
-    value = ndb.FloatProperty()
+# class CurrentBudget(ndb.Model):
+#     value = ndb.FloatProperty()
+
+class Item(ndb.Model):
+    name = ndb.StringProperty()
+    cost = ndb.FloatProperty()
+    date = ndb.StringProperty()
+
+    # def date_standard(self):
+    #     if '/' in date:
+    #         last_index = date.index('/')
+    #         month = date[0:last_index:]
+    #         next_index = date.index('/', last_index)
+    #         last_index =
+    #         day = date[next_index:]
 
 class Money(ndb.Model):
     # this model
@@ -44,7 +57,7 @@ class MainHandler(webapp2.RequestHandler):
     def get(self):
         user = users.get_current_user()
 
-
+        # if the user is logged in, show the main page. else show the home page
         if user:
             logout_url = users.CreateLogoutURL('/')
 
