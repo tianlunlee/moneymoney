@@ -11,8 +11,10 @@ table.center{
 h1{
   font-size: 60px;
   font-weight: bolder;
+  background-color: #fde5be;
+  -webkit-box-shadow: 5px 5px 15px rgba(0,0,0,0.4);
+    -moz-box-shadow: 5px 5px 15px rgba(0,0,0,0.4);
 }
-
 h3{
   text-align: left;
 }
