@@ -17,6 +17,8 @@ class User(ndb.Model):
     # university_key = ndb.KeyProperty(kind=University)
 # class CurrentBudget(ndb.Model):
 #     value = ndb.FloatProperty()
+    def create_budget(self, source_name, user_key, balance)
+        Budget(source_name, user_key, balance)
 
 class Item(ndb.Model):
     item_name = ndb.StringProperty()
@@ -24,13 +26,8 @@ class Item(ndb.Model):
     date = ndb.StringProperty()
     user_key = ndb.KeyProperty(kind=User)
 
-    # def date_standard(self):
-    #     if '/' in date:
-    #         last_index = date.index('/')
-    #         month = date[0:last_index:]
-    #         next_index = date.index('/', last_index)
-    #         last_index =
-    #         day = date[next_index:]
+
+
 
 class Budget(ndb.Model):
     # this model
@@ -96,7 +93,11 @@ class MainHandler(webapp2.RequestHandler):
 
 
         date = self.request.get('date')
-        cost = float(self.request.get('cost'))
+        cost = self.request.get('cost')
+        if cost: # if nonempty, convert to float
+            cost = float(cost)
+        else: # otherwise set it to 0
+            cost = 0
         item_name = self.request.get('name')
 
         # interact with db
