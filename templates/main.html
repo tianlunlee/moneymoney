@@ -17,6 +17,8 @@
 
 
   <h3> Hello {{user.username}},</h3>
+  <button style="float: right"><a href="/addbudget">New Budget</a></button>
+  <br>
   <br>
   Your Current Budget: __________
   <br>
@@ -49,10 +51,12 @@
               <p><input type="submit" value="Add"> </p>
             </td>
           </tr>
+
+
           {% for item in items %}
             <tr>
               <td>{{item.date}}</td>
-              <td>{{item.name}}</td>
+              <td>{{item.item_name}}</td>
               <td>{{item.cost}}</td>
               <td>{{remainingBalance}}</td>
               {% endfor %}
@@ -61,7 +65,7 @@
       </form>
     </div>
     <br>
-    <button><a class='history' href='/history?key='>View All History</a></button>
+    <button><a class='history' href='{{user.history_url()}}'>View All History</a></button>
     <br>
     <br>
     <div>

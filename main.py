@@ -14,6 +14,8 @@ class User(ndb.Model):
     username = ndb.StringProperty()
     email = ndb.StringProperty()
 
+    def history_url(self):
+        return '/history?key=' + self.key.urlsafe()
 
     def create_budget(self, source_name, user_key, balance):
         Budget(sourcename=source_name, user_key=user_key, balance=balance)
@@ -67,7 +69,7 @@ class MainHandler(webapp2.RequestHandler):
                 user = User.query(User.username == username).get()
 
 
-            items = Item.query(Item.user_key==user.key).fetch()
+            items = Item.query(Item.user_key==user.key).order(-Item.date).fetch()
 
             template = jinja_environment.get_template('main.html')
             template_vals = {'user':user, 'logout_url':logout_url, 'items':items}
@@ -105,11 +107,24 @@ class MainHandler(webapp2.RequestHandler):
         # render
         self.redirect('/')
 
+class HistoryHandler(webapp2.RequestHandler):
+    def get(self):
+        current_user = users.get_current_user()
+        email = current_user.email()
+        user = User.query(User.email == email).get()
+        user_key = user.key
+
+        items = Item.query(Item.user_key==user.key).order(-Item.date).fetch()
+
+        template = jinja_environment.get_template('history.html')
+        template_vals = {'user':user, 'items':items}
+        self.response.write(template.render(template_vals))
 
 
 
 
 app = webapp2.WSGIApplication([
-    ('/', MainHandler)
+    ('/', MainHandler),
+    ('/history', HistoryHandler)
 
 ], debug=True)

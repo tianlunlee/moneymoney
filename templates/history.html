@@ -4,7 +4,32 @@
     <meta charset="utf-8">
     <title>Your Account History</title>
   </head>
-  <body>
-    
+  <link rel="stylesheet" href="stylesheets/main.css">
+  <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+  <h1>{{user.username}}'s Account History</h1>
+  <body class="center">
+    <br>
+    <button><a href="/">Return to Finances</a></button>
+    <br>
+    <div>
+      <table class="center" width = 75%>
+        <tr>
+          <th>Date: </th>
+          <th>Item/Service: </th>
+          <th>Cost: </th>
+          <th>New Balance: </th>
+        </tr>
+
+        {% for item in items %}
+          <tr>
+            <td>{{item.date}}</td>
+            <td>{{item.item_name}}</td>
+            <td>{{item.cost}}</td>
+            <td>{{remainingBalance}}</td>
+            {% endfor %}
+          </tr>
+      </table>
+    </div>
+    <br>
   </body>
 </html>
