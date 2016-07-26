@@ -28,4 +28,15 @@ indexes:
   properties:
   - name: user_key
   - name: date
+
+- kind: Item
+  properties:
+  - name: user_key
+  - name: date
+    direction: desc
+
+- kind: Item
+  properties:
+  - name: user_key
+  - name: datetime
     direction: desc

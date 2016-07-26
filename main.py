@@ -26,6 +26,7 @@ class Item(ndb.Model):
     date = ndb.StringProperty()
     user_key = ndb.KeyProperty(kind=User)
     remaining_balance = ndb.FloatProperty()
+    datetime = ndb.DateTimeProperty(auto_now_add = True)
 
 
 
@@ -102,15 +103,15 @@ class MainHandler(webapp2.RequestHandler):
         email = current_user.email()
 
         user = User.query(User.email == email).get()
-        self.response.write(user)
+
         user_key = user.key
 
         budget = Budget.query(Budget.user_key == user_key).get()
+        item = Item.query(Item.user_key == user_key).order(-Item.datetime).get()
         if not budget:
             script = 'alert({})'.format('You don\'t have a budget yet!')
             #alert the user that they do not currently have a budget
 
-            self.get()
         else:
 
             date = self.request.get('date')
@@ -120,14 +121,16 @@ class MainHandler(webapp2.RequestHandler):
             else: # otherwise set it to 0
                 cost = 0
             item_name = self.request.get('name')
-
-            remaining_balance = budget.amount - cost
+            if not item:
+                remaining_balance = budget.amount - cost
+            else:
+                remaining_balance = item.remaining_balance - cost
 
             # interact with db
             new_item = Item(item_name=item_name, cost=cost, date=date, user_key=user_key, remaining_balance=remaining_balance)
             new_item.put()
             # render
-        self.redirect('/')
+            self.redirect('/')
 
 class HistoryHandler(webapp2.RequestHandler):
     def get(self):
@@ -148,7 +151,7 @@ class BudgetHandler(webapp2.RequestHandler):
         # get info
         template = jinja_environment.get_template('budget.html')
         # template_vals = {'current_budget':current_budget}
-        #
+
         self.response.write(template.render())
     def post(self):
         current_user = users.get_current_user()
@@ -156,7 +159,7 @@ class BudgetHandler(webapp2.RequestHandler):
 
 
         user = User.query(User.email == email).get()
-        self.response.write(user)
+
         user_key = user.key
 
         source_name = self.request.get('source_name')
