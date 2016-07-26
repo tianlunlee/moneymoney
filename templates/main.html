@@ -22,9 +22,9 @@
   <br>
   Your Current Budget:
   {% if budgets[0] %}
-  {{budgets[0].amount}}
+    {{budgets[0].amount}}
   {% else %}
-  No Budget!
+    No Budget!
   {% endif %}
   <br>
   <br>
@@ -60,15 +60,13 @@
           </tr>
 
           {% for i in range(0,5) %}
-
-          {% if items[i] %}
-            <tr>
-              <td>{{items[i].date}}</td>
-              <td>{{items[i].item_name}}</td>
-              <td>{{items[i].cost}}</td>
-              <td>{{items[i].remaining_balance}}</td>
+              {% if items[i] %}
+                <tr>
+                  <td>{{items[i].date}}</td>
+                  <td>{{items[i].item_name}}</td>
+                  <td>{{items[i].cost}}</td>
+                  <td>{{items[i].remaining_balance}}</td>
               {% endif %}
-
               {% endfor %}
 
             </tr>
