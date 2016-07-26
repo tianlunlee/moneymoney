@@ -13,7 +13,7 @@
   <h1 class="center">Finances</h1>
 
 
-  <h3> Hello,</h3>
+  <h3> Hello {{user.username}},</h3>
   <!-- <h3>Hello {{user.name}}, -->
   <br>
   Your Current Budget: __________
@@ -21,7 +21,7 @@
 
   <body class="center">
 
-    <form action='/' method='add'>
+    <form action='/' method='post'>
       <table class="center" width = 75%>
         <tr>
           <th>Date: </th>
@@ -38,10 +38,12 @@
             <input name='name' placeholder='Item/Service eg.Rent, Electricity Bill'>
           </td>
           <td>
-            <input name='Cost' placeholder='Date'>
+            <input name='cost' placeholder='Cost'>
           </td>
           <td>
-            <button>Add</button>
+            <!-- line below creates a button that allows submission -->
+            <p><input type="submit" value="Add"> </p>
+
           </td>
         </tr>
       </table>
