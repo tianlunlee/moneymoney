@@ -15,12 +15,8 @@
   <h1 class="center">Finances</h1>
 
 
-<<<<<<< HEAD
-  <h3> Hello, {{user.name}}</h3>
-=======
+
   <h3> Hello {{user.username}},</h3>
->>>>>>> 979cadc492fff5e4f5dc785bd4d0fa6a201079d1
-  <!-- <h3>Hello {{user.name}}, -->
   <br>
   Your Current Budget: __________
   <br>
@@ -28,7 +24,6 @@
   <!-- Your Current Budget: {{user.goal}} -->
 
   <body class="center">
-<<<<<<< HEAD
     <div>
       <form action='/' method='add'>
         <table class="center" width = 75%>
@@ -50,7 +45,8 @@
               <input name='cost' placeholder='Cost'>
             </td>
             <td>
-              <button>Add</button>
+              <!-- line below creates a button that allows submission -->
+              <p><input type="submit" value="Add"> </p>
             </td>
           </tr>
           {% for item in items %}
@@ -69,42 +65,28 @@
     <br>
     <br>
     <div>
-      <table class = "budget" width = 25%>
-=======
-
-    <form action='/' method='post'>
-      <table class="center" width = 75%>
->>>>>>> 979cadc492fff5e4f5dc785bd4d0fa6a201079d1
-        <tr>
-          <th class = "budget">
-            Plan
-          </th>
-          <th class = "budget">
-            Actual
-          </th>
-        </tr>
-        <tr>
-          <td class = "budget">
-            Current Budget
-            {{user.goal}}
-            <!-- CurrentBudget -->
-          </td>
-<<<<<<< HEAD
-          <td class = "budget">
-            Actual Spending
-            <!-- Actual spending -->
-=======
-          <td>
-            <input name='cost' placeholder='Cost'>
-          </td>
-          <td>
-            <!-- line below creates a button that allows submission -->
-            <p><input type="submit" value="Add"> </p>
-
->>>>>>> 979cadc492fff5e4f5dc785bd4d0fa6a201079d1
-          </td>
-        </tr>
-      </table>
+      <form action='/' method='post'>
+        <table class = "budget" width = 25%>
+          <tr>
+            <th class = "budget">
+              Plan
+            </th>
+            <th class = "budget">
+              Actual
+            </th>
+          </tr>
+          <tr>
+            <td class = "budget">
+              Current Budget
+              {{user.goal}}
+              <!-- CurrentBudget -->
+            </td>
+            <td class = "budget">
+              Actual Spending
+              <!-- Actual spending -->
+          </tr>
+        </table>
+      </form>
     </div>
 
 
