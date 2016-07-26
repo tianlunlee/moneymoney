@@ -13,10 +13,8 @@ jinja_environment = jinja2.Environment(
 class User(ndb.Model):
     username = ndb.StringProperty()
     email = ndb.StringProperty()
-    # university = ndb.StringProperty()
-    # university_key = ndb.KeyProperty(kind=University)
-# class CurrentBudget(ndb.Model):
-#     value = ndb.FloatProperty()
+
+
     def create_budget(self, source_name, user_key, balance):
         Budget(sourcename=source_name, user_key=user_key, balance=balance)
 
@@ -69,8 +67,10 @@ class MainHandler(webapp2.RequestHandler):
                 user = User.query(User.username == username).get()
 
 
+            items = Item.query(Item.user_key==user.key).fetch()
+
             template = jinja_environment.get_template('main.html')
-            template_vals = {'user':user, 'logout_url':logout_url}
+            template_vals = {'user':user, 'logout_url':logout_url, 'items':items}
             self.response.write(template.render(template_vals))
 
         else:
@@ -85,13 +85,11 @@ class MainHandler(webapp2.RequestHandler):
     def post(self):
         # get info
         current_user = users.get_current_user()
-
         email = current_user.email()
 
         user = User.query(User.email == email).get()
         self.response.write(user)
         user_key = user.key
-
 
         date = self.request.get('date')
         cost = self.request.get('cost')
@@ -110,7 +108,8 @@ class MainHandler(webapp2.RequestHandler):
 
 
 
+
 app = webapp2.WSGIApplication([
-    ('/', MainHandler),
+    ('/', MainHandler)
 
 ], debug=True)
