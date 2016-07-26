@@ -1,55 +1,113 @@
 <!DOCTYPE html>
 <html>
   <link rel="stylesheet" href="stylesheets/main.css">
+  <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
   <head>
     <meta charset="utf-8">
     <title>Finances</title>
+    <br>
     <form action="/">
-      <p><a href="{{logout_url}}">Log Out </a></p>
+      <p><a class="button-link" href="{{logout_url}}">Log Out </a></p>
     </form>
   </head>
-
+  <br>
   <!-- {{user.name}}'s Finances -->
   <h1 class="center">Finances</h1>
 
 
-  <h3> Hello,</h3>
+  <h3> Hello, {{user.name}}</h3>
   <!-- <h3>Hello {{user.name}}, -->
   <br>
   Your Current Budget: __________
+  <br>
+  <br>
   <!-- Your Current Budget: {{user.goal}} -->
 
   <body class="center">
+    <div>
+      <form action='/' method='add'>
+        <table class="center" width = 75%>
+          <tr>
+            <th>Date: </th>
+            <th>Item/Service: </th>
+            <th>Cost: </th>
+            <th>New Balance: </th>
+          </tr>
 
-    <form action='/' method='add'>
-      <table class="center" width = 75%>
+          <tr>
+            <td>
+              <input name='date' id='datepicker'placeholder='Date eg.07/25/2016'>
+            </td>
+            <td>
+              <input name='name' placeholder='Item/Service eg.Rent, Electricity Bill'>
+            </td>
+            <td>
+              <input name='cost' placeholder='Cost'>
+            </td>
+            <td>
+              <button>Add</button>
+            </td>
+          </tr>
+          {% for item in items %}
+            <tr>
+              <td>{{item.date}}</td>
+              <td>{{item.name}}</td>
+              <td>{{item.cost}}</td>
+              <td>{{remainingBalance}}</td>
+              {% endfor %}
+            </tr>
+        </table>
+      </form>
+    </div>
+    <br>
+    <a class='history' href='/history?key='>View All History</a>
+    <br>
+    <br>
+    <div>
+      <table class = "budget" width = 25%>
         <tr>
-          <th>Date: </th>
-          <th>Item/Service: </th>
-          <th>Cost: </th>
-          <th>New Balance: </th>
+          <th class = "budget">
+            Plan
+          </th>
+          <th class = "budget">
+            Actual
+          </th>
         </tr>
-
         <tr>
-          <td>
-            <input name='date' id='datepicker'placeholder='Date eg.07/25/2016'>
+          <td class = "budget">
+            Current Budget
+            {{user.goal}}
+            <!-- CurrentBudget -->
           </td>
-          <td>
-            <input name='name' placeholder='Item/Service eg.Rent, Electricity Bill'>
-          </td>
-          <td>
-            <input name='Cost' placeholder='Date'>
-          </td>
-          <td>
-            <button>Add</button>
+          <td class = "budget">
+            Actual Spending
+            <!-- Actual spending -->
           </td>
         </tr>
       </table>
-    </form>
+    </div>
 
 
 
-  <html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -60,13 +118,6 @@
     } );
     </script>
 
-
-
-
-
-
   </body>
-  </html>
-
 
 </html>
