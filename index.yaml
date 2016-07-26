@@ -26,6 +26,12 @@ indexes:
 
 - kind: Item
   properties:
+  - name: budget_key
+  - name: date
+    direction: desc
+
+- kind: Item
+  properties:
   - name: user_key
   - name: date
 

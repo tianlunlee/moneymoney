@@ -17,19 +17,6 @@ class User(ndb.Model):
     def history_url(self):
         return '/history?key=' + self.key.urlsafe()
 
-    def create_budget(self, source_name, user_key, balance):
-        Budget(sourcename=source_name, user_key=user_key, balance=balance)
-
-class Item(ndb.Model):
-    item_name = ndb.StringProperty()
-    cost = ndb.FloatProperty()
-    date = ndb.StringProperty()
-    user_key = ndb.KeyProperty(kind=User)
-    remaining_balance = ndb.FloatProperty()
-    datetime = ndb.DateTimeProperty(auto_now_add = True)
-
-
-
 class Budget(ndb.Model):
     # this model
     source_name = ndb.StringProperty()
@@ -50,6 +37,18 @@ class Budget(ndb.Model):
     # def calc_remaining(self, value):
     #      self.remaining = balance
     #      self.remaining -= value
+
+
+class Item(ndb.Model):
+    item_name = ndb.StringProperty()
+    cost = ndb.FloatProperty()
+    date = ndb.StringProperty()
+    budget_key = ndb.KeyProperty(kind=Budget)
+    remaining_balance = ndb.FloatProperty()
+    datetime = ndb.DateTimeProperty(auto_now_add = True)
+
+
+
 
 
 
@@ -79,9 +78,10 @@ class MainHandler(webapp2.RequestHandler):
             else:
                 user = User.query(User.username == username).get()
 
+            # budgets = Budget.query(Budget.user_key==user.key).order(-Budget.date, -Budget.datetime).fetch()
+            budgets = Budget.query(Budget.user_key==user.key).order(-Budget.date, -Budget.datetime).get()
+            items = Item.query(Item.budget_key==budgets.key).order(-Item.date).fetch()
 
-            items = Item.query(Item.user_key==user.key).order(-Item.date).fetch()
-            budgets = Budget.query(Budget.user_key==user.key).order(-Budget.date, -Budget.datetime).fetch()
 
             template = jinja_environment.get_template('main.html')
             template_vals = {'user':user, 'logout_url':logout_url, 'items':items, 'budgets':budgets}
@@ -104,10 +104,10 @@ class MainHandler(webapp2.RequestHandler):
 
         user = User.query(User.email == email).get()
 
-        user_key = user.key
 
-        budget = Budget.query(Budget.user_key == user_key).get()
-        item = Item.query(Item.user_key == user_key).order(-Item.datetime).get()
+
+        budget = Budget.query(Budget.user_key == user.key).get()
+        item = Item.query(Item.budget_key == budget.key).order(-Item.datetime).get()
         if not budget:
             script = 'alert({})'.format('You don\'t have a budget yet!')
             #alert the user that they do not currently have a budget
@@ -127,7 +127,7 @@ class MainHandler(webapp2.RequestHandler):
                 remaining_balance = item.remaining_balance - cost
 
             # interact with db
-            new_item = Item(item_name=item_name, cost=cost, date=date, user_key=user_key, remaining_balance=remaining_balance)
+            new_item = Item(item_name=item_name, cost=cost, date=date, budget_key=budget_key, remaining_balance=remaining_balance)
             new_item.put()
             # render
             self.redirect('/')
@@ -137,9 +137,10 @@ class HistoryHandler(webapp2.RequestHandler):
         current_user = users.get_current_user()
         email = current_user.email()
         user = User.query(User.email == email).get()
-        user_key = user.key
 
-        items = Item.query(Item.user_key==user.key).order(-Item.date).fetch()
+        budget = Budget.query(Budget.user_key == user.key).get()
+
+        items = Item.query(Item.budget_key==budget.key).order(-Item.date).fetch()
 
         template = jinja_environment.get_template('history.html')
         template_vals = {'user':user, 'items':items}
