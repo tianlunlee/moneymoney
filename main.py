@@ -31,16 +31,20 @@ class Budget(ndb.Model):
     # this model
     source_name = ndb.StringProperty()
     user_key = ndb.KeyProperty(kind=User)
-    balance = ndb.FloatProperty()
+    amount = ndb.FloatProperty()
+    # remaining = ndb.FloatProperty()
 
-    def decrease_value(self, amount):
-        self.balance -= amount
+    def decrease_value(self, value):
+        self.amount -= amount
 
-    # def set_value(self, amount):
-    #     self.balance = amount
+    def add_value(self, value):
+        self.amount += amount
 
-    def add_value(self, amount):
-        self.balance += amount
+    # def calc_remaining(self, value):
+    #      self.remaining = balance
+    #      self.remaining -= value
+
+
 
 class PastBudget(ndb.Model):
     source_name = ndb.StringProperty()
@@ -105,11 +109,47 @@ class MainHandler(webapp2.RequestHandler):
         # render
         self.redirect('/')
 
+class BudgetHandler(webapp2.RequestHandler):
+
+    def get(self):
+        # get info
+
+
+        template = jinja_environment.get_template('budget.html')
 
 
 
+
+
+        # template_vals = {'current_budget':current_budget}
+        #
+        self.response.write(template.render())
+    def post(self):
+        current_user = users.get_current_user()
+        email = current_user.email()
+
+
+        user = User.query(User.email == email).get()
+        self.response.write(user)
+        user_key = user.key
+
+        source_name = self.request.get('source_name')
+        amount = self.request.get('amount')
+        if amount: # if nonempty, convert to float
+            amount = float(amount)
+        else: # otherwise set it to 0
+            amount = 0
+
+
+        current_budget = Budget(source_name=source_name, user_key=user_key, amount = amount)
+        current_budget.put()
+
+        self.redirect('/')
+
+#### CREATE A HISTORY HANDLER
 
 app = webapp2.WSGIApplication([
-    ('/', MainHandler)
+    ('/', MainHandler),
+    ('/addbudget', BudgetHandler)
 
 ], debug=True)
