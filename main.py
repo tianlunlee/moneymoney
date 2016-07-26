@@ -32,6 +32,9 @@ class Budget(ndb.Model):
     source_name = ndb.StringProperty()
     user_key = ndb.KeyProperty(kind=User)
     amount = ndb.FloatProperty()
+    date = ndb.StringProperty()
+    datetime = ndb.DateTimeProperty(auto_now_add = True)
+
     # remaining = ndb.FloatProperty()
 
     def decrease_value(self, value):
@@ -55,6 +58,8 @@ class MainHandler(webapp2.RequestHandler):
     def get(self):
         current_user = users.get_current_user()
 
+
+
         # if the user is logged in, show the main page. else show the home page
         if current_user:
             logout_url = users.CreateLogoutURL('/')
@@ -71,10 +76,12 @@ class MainHandler(webapp2.RequestHandler):
                 user = User.query(User.username == username).get()
 
 
-            items = Item.query(Item.user_key==user.key).fetch()
+            items = Item.query(Item.user_key==user.key).order(-Item.date).fetch()
+            budgets = Budget.query(Budget.user_key==user.key).order(-Budget.date, -Budget.datetime).fetch()
+
 
             template = jinja_environment.get_template('main.html')
-            template_vals = {'user':user, 'logout_url':logout_url, 'items':items}
+            template_vals = {'user':user, 'logout_url':logout_url, 'items':items, 'budgets':budgets}
             self.response.write(template.render(template_vals))
 
         else:
@@ -135,14 +142,15 @@ class BudgetHandler(webapp2.RequestHandler):
 
         source_name = self.request.get('source_name')
         amount = self.request.get('amount')
+        date = self.request.get('date')
         if amount: # if nonempty, convert to float
             amount = float(amount)
         else: # otherwise set it to 0
             amount = 0
 
 
-        current_budget = Budget(source_name=source_name, user_key=user_key, amount = amount)
-        current_budget.put()
+        new_budget = Budget(source_name=source_name, user_key=user_key, amount = amount, date = date)
+        new_budget.put()
 
         self.redirect('/')
 
