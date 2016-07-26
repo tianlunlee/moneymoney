@@ -10,8 +10,6 @@ indexes:
 # automatically uploaded to the admin console when you next deploy
 # your application using appcfg.py.
 
-<<<<<<< HEAD
-=======
 - kind: Budget
   properties:
   - name: user_key
@@ -26,7 +24,7 @@ indexes:
   - name: date
     direction: desc
 
->>>>>>> 70a8f848d77490b3afb0bcf34cf15ef7c2ba4503
+
 - kind: Item
   properties:
   - name: user_key
