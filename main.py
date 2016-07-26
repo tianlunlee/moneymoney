@@ -65,8 +65,6 @@ class MainHandler(webapp2.RequestHandler):
             #interact with db
             current_users = User.query(User.email==email).fetch()
 
-
-
             if not current_users: # if the user doesn't exist in the current users list
                 user = User(username=username, email=email)
                 user.put()
@@ -85,9 +83,6 @@ class MainHandler(webapp2.RequestHandler):
 
             template_vals = {'login_url':login_url}
             self.response.write(template.render(template_vals))
-
-            # self.response.write(
-            #     '<br><html><body>{}</body></html>'.format(greeting))
 
     def post(self):
         # get info
@@ -109,9 +104,6 @@ class MainHandler(webapp2.RequestHandler):
         new_item.put()
         # render
         self.redirect('/')
-
-
-
 
 
 app = webapp2.WSGIApplication([
