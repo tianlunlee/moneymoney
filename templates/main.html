@@ -20,7 +20,12 @@
   <a class= "button" style ="float: right" href="/addbudget">New Budget</a>
   <br>
   <br>
-  Your Current Budget: {{budgets[0].amount}}
+  Your Current Budget:
+  {% if budgets[0] %}
+  {{budgets[0].amount}}
+  {% else %}
+  No Budget!
+  {% endif %}
   <br>
   <br>
   <!-- Your Current Budget: {{user.goal}} -->
@@ -56,7 +61,8 @@
           </tr>
 
           {% for i in range(0,5) %}
-          {% if i < items[-1] %}
+
+          {% if items[i] %}
             <tr>
               <td>{{items[i].date}}</td>
               <td>{{items[i].item_name}}</td>
@@ -87,13 +93,28 @@
 
         <tr>
           <td class = "budget">
-            Name: {{budgets[0].source_name}}
+            Name:
+            {% if budgets[0] %}
+            {{budgets[0].source_name}}
+            {% else %}
+            No Budget!
+            {% endif %}
             <br>
             <br>
-            Start Date: {{budgets[0].date}}
+            Start Date:
+            {% if budgets[0] %}
+            {{budgets[0].date}}
+            {% else %}
+            No Budget!
+            {% endif %}
             <br>
             <br>
-            To Spend: {{budgets[0].amount}}
+            To Spend:
+            {% if budgets[0] %}
+            {{budgets[0].amount}}
+            {% else %}
+            No Budget!
+            {% endif %}
           </td>
 
           <td class = "budget">
