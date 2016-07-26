@@ -15,7 +15,11 @@
   <h1 class="center">Finances</h1>
 
 
+<<<<<<< HEAD
   <h3> Hello, {{user.name}}</h3>
+=======
+  <h3> Hello {{user.username}},</h3>
+>>>>>>> 979cadc492fff5e4f5dc785bd4d0fa6a201079d1
   <!-- <h3>Hello {{user.name}}, -->
   <br>
   Your Current Budget: __________
@@ -24,6 +28,7 @@
   <!-- Your Current Budget: {{user.goal}} -->
 
   <body class="center">
+<<<<<<< HEAD
     <div>
       <form action='/' method='add'>
         <table class="center" width = 75%>
@@ -65,6 +70,11 @@
     <br>
     <div>
       <table class = "budget" width = 25%>
+=======
+
+    <form action='/' method='post'>
+      <table class="center" width = 75%>
+>>>>>>> 979cadc492fff5e4f5dc785bd4d0fa6a201079d1
         <tr>
           <th class = "budget">
             Plan
@@ -79,9 +89,19 @@
             {{user.goal}}
             <!-- CurrentBudget -->
           </td>
+<<<<<<< HEAD
           <td class = "budget">
             Actual Spending
             <!-- Actual spending -->
+=======
+          <td>
+            <input name='cost' placeholder='Cost'>
+          </td>
+          <td>
+            <!-- line below creates a button that allows submission -->
+            <p><input type="submit" value="Add"> </p>
+
+>>>>>>> 979cadc492fff5e4f5dc785bd4d0fa6a201079d1
           </td>
         </tr>
       </table>
