@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Add Budget</title>
+  </head>
+  <body>
+
+
+    <div>
+      <form action='/addbudget' method='post'>
+        <table class="center" width = 75%>
+          <tr>
+            <th>Date: </th>
+            <th>Source: </th>
+            <th>Amount: </th>
+
+          </tr>
+
+          <tr>
+            <td>
+              <input name='date' id='datepicker'placeholder='Date eg.07/25/2016'>
+            </td>
+            <td>
+              <input name='source_name' placeholder='eg. bank, cash'>
+            </td>
+            <td>
+              <input name='amount' placeholder='Amount'>
+            </td>
+            <td>
+              <!-- line below creates a button that allows submission -->
+              <p><input type="submit" value="Add"> </p>
+            </td>
+          </tr>
+        </table>
+      </form>
+    </div>
+
+
+  </body>
+</html>

@@ -33,16 +33,23 @@ class Budget(ndb.Model):
     # this model
     source_name = ndb.StringProperty()
     user_key = ndb.KeyProperty(kind=User)
-    balance = ndb.FloatProperty()
+    amount = ndb.FloatProperty()
+    date = ndb.StringProperty()
+    datetime = ndb.DateTimeProperty(auto_now_add = True)
 
-    def decrease_value(self, amount):
-        self.balance -= amount
+    # remaining = ndb.FloatProperty()
 
-    # def set_value(self, amount):
-    #     self.balance = amount
+    def decrease_value(self, value):
+        self.amount -= amount
 
-    def add_value(self, amount):
-        self.balance += amount
+    def add_value(self, value):
+        self.amount += amount
+
+    # def calc_remaining(self, value):
+    #      self.remaining = balance
+    #      self.remaining -= value
+
+
 
 class PastBudget(ndb.Model):
     source_name = ndb.StringProperty()
@@ -52,6 +59,8 @@ class PastBudget(ndb.Model):
 class MainHandler(webapp2.RequestHandler):
     def get(self):
         current_user = users.get_current_user()
+
+
 
         # if the user is logged in, show the main page. else show the home page
         if current_user:
@@ -70,9 +79,10 @@ class MainHandler(webapp2.RequestHandler):
 
 
             items = Item.query(Item.user_key==user.key).order(-Item.date).fetch()
+            budgets = Budget.query(Budget.user_key==user.key).order(-Budget.date, -Budget.datetime).fetch()
 
             template = jinja_environment.get_template('main.html')
-            template_vals = {'user':user, 'logout_url':logout_url, 'items':items}
+            template_vals = {'user':user, 'logout_url':logout_url, 'items':items, 'budgets':budgets}
             self.response.write(template.render(template_vals))
 
         else:
@@ -120,11 +130,39 @@ class HistoryHandler(webapp2.RequestHandler):
         template_vals = {'user':user, 'items':items}
         self.response.write(template.render(template_vals))
 
+class BudgetHandler(webapp2.RequestHandler):
+
+    def get(self):
+        # get info
+        template = jinja_environment.get_template('budget.html')
+        # template_vals = {'current_budget':current_budget}
+        #
+        self.response.write(template.render())
+    def post(self):
+        current_user = users.get_current_user()
+        email = current_user.email()
 
 
+        user = User.query(User.email == email).get()
+        self.response.write(user)
+        user_key = user.key
+
+        source_name = self.request.get('source_name')
+        amount = self.request.get('amount')
+        date = self.request.get('date')
+        if amount: # if nonempty, convert to float
+            amount = float(amount)
+        else: # otherwise set it to 0
+            amount = 0
+
+
+        new_budget = Budget(source_name=source_name, user_key=user_key, amount = amount, date = date)
+        new_budget.put()
+
+        self.redirect('/')
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
-    ('/history', HistoryHandler)
-
+    ('/history', HistoryHandler),
+    ('/addbudget', BudgetHandler)
 ], debug=True)
