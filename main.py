@@ -78,14 +78,17 @@ class MainHandler(webapp2.RequestHandler):
             else:
                 user = User.query(User.username == username).get()
 
-            # budgets = Budget.query(Budget.user_key==user.key).order(-Budget.date, -Budget.datetime).fetch()
-            budgets = Budget.query(Budget.user_key==user.key).order(-Budget.date, -Budget.datetime).get()
-            items = Item.query(Item.budget_key==budgets.key).order(-Item.date).fetch()
 
+            budgets = Budget.query(Budget.user_key==user.key).order(-Budget.date, -Budget.datetime).fetch()
+            if budgets:
+                items = Item.query(Item.budget_key==budgets[0].key).order(-Item.date).fetch()
+                template_vals = {'user':user, 'logout_url':logout_url, 'items':items, 'budgets':budgets}
 
-            template = jinja_environment.get_template('main.html')
-            template_vals = {'user':user, 'logout_url':logout_url, 'items':items, 'budgets':budgets}
-            self.response.write(template.render(template_vals))
+                template = jinja_environment.get_template('main.html')
+
+                self.response.write(template.render(template_vals))
+            else:
+                self.redirect('/addbudget')
 
         else:
             login_url = users.CreateLoginURL('/')
@@ -127,7 +130,7 @@ class MainHandler(webapp2.RequestHandler):
                 remaining_balance = item.remaining_balance - cost
 
             # interact with db
-            new_item = Item(item_name=item_name, cost=cost, date=date, budget_key=budget_key, remaining_balance=remaining_balance)
+            new_item = Item(item_name=item_name, cost=cost, date=date, budget_key=budget.key, remaining_balance=remaining_balance)
             new_item.put()
             # render
             self.redirect('/')
