@@ -2,30 +2,38 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Your Account History</title>
+    <title>Previous Budgets</title>
   </head>
   <link rel="stylesheet" href="stylesheets/main.css">
   <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
-  <h1>{{user.username}}'s Account History</h1>
+  <h1>{{user.username}}'s Budget History</h1>
   <body class="center">
     <br>
     <a class= "button" href="/">Return to Finances</a>
     <br>
     <br>
+    <h2 style="float:right">Total saved lifetime: {{total}}</h2>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
     <div>
       <table class="center" width = 75%>
         <tr>
-          <th>Date: </th>
-          <th>Item/Service: </th>
-          <th>Cost: </th>
-          <th>New Balance: </th>
+          <th>Name: </th>
+          <th>Start Date: </th>
+          <th>To Spend: </th>
+          <th>Amount Spent: </th>
+          <th>Remained: </th>
         </tr>
 
-        {% for item in items %}
+        {% for budget in budgets %}
           <tr>
-            <td>{{item.date}}</td>
-            <td>{{item.item_name}}</td>
-            <td>{{item.cost}}</td>
+            <td>{{budget.source_name}}</td>
+            <td>{{budget.date}}</td>
+            <td>{{budget.amount}}</td>
+            <td>{{amountSpent}}</td>
             <td>{{remainingBalance}}</td>
             {% endfor %}
           </tr>
