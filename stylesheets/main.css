@@ -1,0 +1,42 @@
+.center{
+  text-align: center;
+  align-items: center;
+}
+
+table.center{
+    margin-left:auto;
+    margin-right:auto;
+}
+
+h1{
+  font-size: 60px;
+  font-weight: bolder;
+}
+
+h3{
+  text-align: left;
+}
+html{
+  font-family: "Roboto";
+}
+body{
+  margin: 30px;
+}
+table.budget, th.budget, td.budget{
+    border: 1px solid lightgray;
+    border-collapse: collapse;
+    background-color: white;
+}
+
+th, td {
+    padding: 15px;
+}
+
+table {
+    border-spacing: 5px;
+}
+
+a{
+  text-decoration: none;
+  color: black;
+}

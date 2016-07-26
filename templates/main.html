@@ -1,54 +1,124 @@
 <!DOCTYPE html>
 <html>
+  <link rel="stylesheet" href="stylesheets/main.css">
+  <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
   <head>
     <meta charset="utf-8">
     <title>Finances</title>
-
+    <br>
     <form action="/">
-      <p><a href="{{logout_url}}">Log Out </a></p>
+      <button><a class="button-link" href="{{logout_url}}">Log Out </a></button>
     </form>
-    Finances
-    <!-- {{user.name}}'s Finances -->
   </head>
-  <h2> Hello{{user.name}},
-  <!-- <h2>Hello {{user.name}}, -->
-      <br>
-      Your Current Budget: __________
-      <!-- Your Current Budget: {{user.goal}} -->
-  </h2>
-  <body>
+  <br>
+  <!-- {{user.name}}'s Finances -->
+  <h1 class="center">Finances</h1>
 
 
-    <table>
-  <tr>
-    <th>Date</th>
-    <th>Item/Service</th>
-    <th>Cost</th>
-    <th>New Balance</th>
-  </tr>
-  <!-- {% for student in students %} -->
-    <tr>
 
-      <td>
-        <!-- <a href="{{student.url()}}">
-          {{student.name}}
-        </a> -->
-      </td>
+  <h3> Hello {{user.username}},</h3>
+  <button style="float: right"><a href="/addbudget">New Budget</a></button>
+  <br>
+  <br>
+  Your Current Budget: __________
+  <br>
+  <br>
+  <!-- Your Current Budget: {{user.goal}} -->
 
-      <!-- <td> {{student.university}} </td> -->
+  <body class="center">
+    <div>
+      <form action='/' method='post'>
+        <table class="center" width = 75%>
+          <tr>
+            <th>Date: </th>
+            <th>Item/Service: </th>
+            <th>Cost: </th>
+            <th>New Balance: </th>
+          </tr>
 
-        <!-- {% if student.team == 'r': %}
-          <td id="red"> </td>
-        {% elif student.team == 'b': %}
-          <td id="blue"> </td>
-        {% else: %}
-          <td id="yellow"> </td>
-        {% endif %} -->
+          <tr>
+            <td>
+              <input name='date' id='datepicker'placeholder='Date eg.07/25/2016'>
+            </td>
+            <td>
+              <input name='name' placeholder='Item/Service eg.Rent, Bills'>
+            </td>
+            <td>
+              <input name='cost' placeholder='Cost'>
+            </td>
+            <td>
+              <!-- line below creates a button that allows submission -->
+              <p><input type="submit" value="Add"> </p>
+            </td>
+          </tr>
+          {% for item in items %}
+            <tr>
+              <td>{{item.date}}</td>
+              <td>{{item.item_name}}</td>
+              <td>{{item.cost}}</td>
+              <td>{{remainingBalance}}</td>
+              {% endfor %}
+            </tr>
+        </table>
+      </form>
+    </div>
+    <br>
+    <button><a class='history' href='{{user.history_url()}}'>View All History</a></button>
+    <br>
+    <br>
+    <div>
+      <table class = "budget" width = 25%>
+        <tr>
+          <th class = "budget">
+            Plan
+          </th>
+          <th class = "budget">
+            Actual
+          </th>
+        </tr>
+        <tr>
+          <td class = "budget">
+            Current Budget
+            <!-- CurrentBudget -->
+          </td>
+          <td class = "budget">
+            Actual Spending
+            <!-- Actual spending -->
+        </tr>
+      </table>
+    </div>
 
-    </tr>
-  <!-- {% endfor %} -->
-</table>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+    <script>
+    $( function() {
+      $( "#datepicker" ).datepicker();
+    } );
+    </script>
 
   </body>
+
 </html>
