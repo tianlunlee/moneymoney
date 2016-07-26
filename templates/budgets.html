@@ -12,6 +12,12 @@
     <a class= "button" href="/">Return to Finances</a>
     <br>
     <br>
+    <h2 style="float:right">Total saved lifetime: {{total}}</h2>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
     <div>
       <table class="center" width = 75%>
         <tr>
@@ -19,13 +25,15 @@
           <th>Start Date: </th>
           <th>To Spend: </th>
           <th>Amount Spent: </th>
+          <th>Remained: </th>
         </tr>
 
         {% for budget in budgets %}
           <tr>
-            <td>{{budget.name}}</td>
+            <td>{{budget.source_name}}</td>
             <td>{{budget.date}}</td>
             <td>{{budget.amount}}</td>
+            <td>{{amountSpent}}</td>
             <td>{{remainingBalance}}</td>
             {% endfor %}
           </tr>
