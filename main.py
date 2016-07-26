@@ -25,7 +25,7 @@ class Item(ndb.Model):
     cost = ndb.FloatProperty()
     date = ndb.StringProperty()
     user_key = ndb.KeyProperty(kind=User)
-
+    remaining_balance = ndb.FloatProperty()
 
 
 
@@ -41,6 +41,7 @@ class Budget(ndb.Model):
 
     def decrease_value(self, value):
         self.amount -= amount
+
 
     def add_value(self, value):
         self.amount += amount
@@ -91,11 +92,12 @@ class MainHandler(webapp2.RequestHandler):
 
             template = jinja_environment.get_template('home.html')
 
-            template_vals = {'login_url':login_url}
+            template_vals = {'login_url':login_url, 'script':''}
             self.response.write(template.render(template_vals))
 
     def post(self):
         # get info
+
         current_user = users.get_current_user()
         email = current_user.email()
 
@@ -103,18 +105,28 @@ class MainHandler(webapp2.RequestHandler):
         self.response.write(user)
         user_key = user.key
 
-        date = self.request.get('date')
-        cost = self.request.get('cost')
-        if cost: # if nonempty, convert to float
-            cost = float(cost)
-        else: # otherwise set it to 0
-            cost = 0
-        item_name = self.request.get('name')
+        budget = Budget.query(Budget.user_key == user_key).get()
+        if not budget:
+            script = 'alert({})'.format('You don\'t have a budget yet!')
+            #alert the user that they do not currently have a budget
 
-        # interact with db
-        new_item = Item(item_name=item_name, cost=cost, date=date, user_key=user_key)
-        new_item.put()
-        # render
+            self.get()
+        else:
+
+            date = self.request.get('date')
+            cost = self.request.get('cost')
+            if cost: # if nonempty, convert to float
+                cost = float(cost)
+            else: # otherwise set it to 0
+                cost = 0
+            item_name = self.request.get('name')
+
+            remaining_balance = budget.amount - cost
+
+            # interact with db
+            new_item = Item(item_name=item_name, cost=cost, date=date, user_key=user_key, remaining_balance=remaining_balance)
+            new_item.put()
+            # render
         self.redirect('/')
 
 class HistoryHandler(webapp2.RequestHandler):
