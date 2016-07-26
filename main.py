@@ -78,14 +78,18 @@ class MainHandler(webapp2.RequestHandler):
             else:
                 user = User.query(User.username == username).get()
 
-            # budgets = Budget.query(Budget.user_key==user.key).order(-Budget.date, -Budget.datetime).fetch()
+
+
             budgets = Budget.query(Budget.user_key==user.key).order(-Budget.date, -Budget.datetime).fetch()
-            items = Item.query(Item.budget_key==budgets[0].key).order(-Item.date).fetch()
+            if budgets:
+                items = Item.query(Item.budget_key==budgets[0].key).order(-Item.date).fetch()
+                template_vals = {'user':user, 'logout_url':logout_url, 'items':items, 'budgets':budgets}
 
+                template = jinja_environment.get_template('main.html')
 
-            template = jinja_environment.get_template('main.html')
-            template_vals = {'user':user, 'logout_url':logout_url, 'items':items, 'budgets':budgets}
-            self.response.write(template.render(template_vals))
+                self.response.write(template.render(template_vals))
+            else:
+                self.redirect('/addbudget')
 
         else:
             login_url = users.CreateLoginURL('/')
