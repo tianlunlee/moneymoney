@@ -2,24 +2,201 @@
 <html>
   <head>
     <style>
+
       h1 {
-        position: center;
-      }
-      img {
-        position: absolute;
+        padding-top: 10px;
+        text-align: center;
+        color: white;
+        font-family: sans-serif;
+        float: left;
+        padding-left: 20px;
+        font-size: 25px;
 
       }
+      #firstwords {
+        font-family: sans-serif;
+        color: white;
+        text-align: center;
+        font-size: 40px;
+        padding-top:170px;
+
+      }
+
+      #secondwords {
+        font-family: sans-serif;
+        color: white;
+        text-align: center;
+      }
+
+      #firsthalf {
+        background-image: url(/images/second.jpg);
+        background-size: cover;
+        width: 100%;
+        height: 500px;
+        margin-top: -40px;
+
+      }
+
+      #firstbutton{
+        float: right;
+        margin-right: 20px;
+        margin-top: 20px;
+        font-family: sans-serif;
+        width: 100px;
+        height: 30px;
+        font-size: 15px;
+
+      }
+
+      #secondbutton {
+        font-size: 20px;
+        margin-left: 42.5%;
+        margin-top: 1.5%;
+        width: 210px;
+        height: 50px;
+      }
+      .button {
+        font-family: sans-serif;
+        color: white;
+        background-color: #ff1a1a;
+        padding: 0;
+        border: 1px solid black;
+      }
+      .button:hover {
+        background-color: darkred;
 
 
+      }
+      .button a {
+        color: #FFFFFF;
+        text-decoration: none;}
 
+      .block {
+        display: inline-block;
+        width: 20%;
+        height: 320px;
+        margin-top: -20px;
+      }
+
+      .block_title {
+        text-align: center;
+        font-size: 20px;
+        font-family: sans-serif;
+        color: #808080;
+
+      }
+      #firstone{
+
+        margin-left: 20%;
+
+      }
+
+      .ex_text {
+        text-align: center;
+        font-family: sans-serif;
+        color: black;
+      }
+
+      #secondhalf {
+        margin-top: -1%;
+      }
+
+      #bottomheader {
+        text-align: center;
+        padding-left: 10px;
+        font-family: sans-serif;
+        padding-top: 15px;
+        border-bottom: 2px solid white;
+        padding-bottom: 10px;
+        font-size: 22px;
+        color: black;
+      }
+
+      #first_title{
+        color: #F08080;
+
+      }
+
+      #second_title {
+        color: #CD2626;
+
+      }
+
+      #third_title {
+        color: #8B1A1A;
+
+      }
+
+      #first_image{
+        width: 270px;
+        height: 140px;
+        padding-left: 5px;
+      }
+      #second_image{
+        width: 260px;
+        height: 140px;
+        padding-left: 20px;
+      }
+
+      #third_image{
+        width: 240px;
+        height: 155px;
+        padding-left: 30px;
+      }
+      #logo {
+        width: 40px;
+        height: 40px;
+        padding-right: 10px;
+
+      }
+      #logo_text{
+        font-size: 20px;
+      }
+      #logo_image{
+        width: 40px;
+        height: 40px;
+        padding-right: 5px;
+
+      }
 
     </style>
-    <a href="{{login_url}}">Sign in</a>
     <meta charset="utf-8">
     <title>College Student Finances</title>
   </head>
   <body>
-    <h1>College Student Finanaces</h1>
-    <img src="/images/firstpage.jpg">
+      <div id="firsthalf">
+
+
+        <a href="" ><h1 id="logo_text"><img src="/images/logo.png" id="logo_image"></img>College Student Finances</h1></a>
+
+        <a href="{{login_url}}"><button class="button" id="firstbutton">Sign In</button></a>
+
+        <h2 id="firstwords"> Manage Your Finances to Keep Student Debt Low!</h2>
+
+        <h3 id="secondwords">The best and simplest online app to mantain your budget</h3>
+
+        <a href="{{login_url}}"><button class="button" id="secondbutton">Sign In</button></a>
+      </div>
+
+      <div id="secondhalf">
+      <h2 id="bottomheader">As easy as...</h2>
+        <div class="block" id="firstone">
+          <h2 class="block_title" id="first_title">1. Set Bugdet</h2>
+          <h4 class="ex_text">Find your total spending budget for each week or month.</h4>
+          <img src="/images/save.jpg" id="first_image"></img>
+        </div>
+
+        <div class="block">
+          <h2 class="block_title" id="second_title">2. Input Spendings</h2>
+          <h4 class="ex_text">Once your budget is set, just keep track of your spending and input it.</h4>
+          <img src="/images/spending.jpg" id="second_image"></img>
+        </div>
+
+        <div class="block" id="secondone">
+          <h2 class="block_title" id="third_title">3. See Savings and Progress</h2>
+          <h4 class="ex_text">Finally, relax and see your savings!</h4>
+          <img src="/images/saving.jpg" id="third_image"></img>
+        </div>
+      </div>
   </body>
 </html>
