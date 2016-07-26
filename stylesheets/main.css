@@ -11,7 +11,9 @@ table.center{
 h1{
   font-size: 60px;
   font-weight: bolder;
-  background-color: #fde5be;
+  background-color: lightgray;
+  padding: 15px;
+  color: black;
   -webkit-box-shadow: 5px 5px 15px rgba(0,0,0,0.4);
     -moz-box-shadow: 5px 5px 15px rgba(0,0,0,0.4);
 }
@@ -20,10 +22,12 @@ h3{
 }
 html{
   font-family: "Roboto";
+  background-color: white;
 }
 body{
   margin: 30px;
 }
+
 table.budget, th.budget, td.budget{
     border: 1px solid lightgray;
     border-collapse: collapse;
@@ -38,7 +42,29 @@ table {
     border-spacing: 5px;
 }
 
-a{
+
+.button {
+  color: white;
+  background-color: #006699;
+  padding: 10px;
+  border: none;
+  text-decoration: none;
+}
+.button:hover {
+  background-color: darkblue;
+
+
+}
+
+/*a{
   text-decoration: none;
   color: black;
-}
+  text-decoration: none;
+  background-color: #9dfbe0;
+  color: white;
+  padding: 2px 6px 2px 6px;
+  border-top: 1px solid #CCCCCC;
+  border-right: 1px solid #333333;
+  border-bottom: 1px solid #333333;
+  border-left: 1px solid #CCCCCC;
+}*/

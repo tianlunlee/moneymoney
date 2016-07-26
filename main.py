@@ -161,8 +161,23 @@ class BudgetHandler(webapp2.RequestHandler):
 
         self.redirect('/')
 
+class OldBudgetHangler(webapp2.RequestHandler):
+    def get(self):
+        current_user = users.get_current_user()
+        email = current_user.email()
+        user = User.query(User.email == email).get()
+        user_key = user.key
+
+        budgets = Budget.query(Budget.user_key==user.key).order(-Budget.date).fetch()
+
+        template = jinja_environment.get_template('budgets.html')
+        template_vals = {'user':user, 'budgets':budgets}
+        self.response.write(template.render(template_vals))
+
+
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
     ('/history', HistoryHandler),
-    ('/addbudget', BudgetHandler)
+    ('/addbudget', BudgetHandler),
+    ('/budgets', OldBudgetHangler)
 ], debug=True)

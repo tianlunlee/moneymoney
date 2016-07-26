@@ -7,7 +7,7 @@
     <title>Finances</title>
     <br>
     <form action="/">
-      <button><a class="button-link" href="{{logout_url}}">Log Out </a></button>
+      <a class="button" href="{{logout_url}}">Log Out </a>
     </form>
   </head>
   <br>
@@ -17,10 +17,10 @@
 
 
   <h3> Hello {{user.username}},</h3>
-  <button style="float: right"><a href="/addbudget">New Budget</a></button>
+  <a class= "button" style ="float: right" href="/addbudget">New Budget</a>
   <br>
   <br>
-  Your Current Budget: __________
+  Your Current Budget: {{budgets[0].amount}}
   <br>
   <br>
   <!-- Your Current Budget: {{user.goal}} -->
@@ -51,42 +51,61 @@
               <p><input type="submit" value="Add"> </p>
             </td>
           </tr>
-          {% for item in items %}
+
+          {% for i in range(0,5) %}
+          {% if i < items[-1] %}
             <tr>
-              <td>{{item.date}}</td>
-              <td>{{item.item_name}}</td>
-              <td>{{item.cost}}</td>
+              <td>{{items[i].date}}</td>
+              <td>{{items[i].item_name}}</td>
+              <td>{{items[i].cost}}</td>
               <td>{{remainingBalance}}</td>
+              {% endif %}
               {% endfor %}
+
             </tr>
         </table>
       </form>
     </div>
     <br>
-    <button><a class='history' href='{{user.history_url()}}'>View All History</a></button>
+    <a class='history button' href='{{user.history_url()}}'>View All History</a>
     <br>
     <br>
     <div>
       <table class = "budget" width = 25%>
         <tr>
           <th class = "budget">
-            Plan
+            Planned
           </th>
           <th class = "budget">
             Actual
           </th>
         </tr>
+
         <tr>
           <td class = "budget">
-            Current Budget
-            <!-- CurrentBudget -->
+            Name: {{budgets[0].source_name}}
+            <br>
+            Start Date: {{budgets[0].date}}
+            <br>
+            To Spend: {{budgets[0].amount}}
           </td>
+
           <td class = "budget">
-            Actual Spending
-            <!-- Actual spending -->
+            Amount Spent:
+          </td>
         </tr>
       </table>
     </div>
+
+
+
+    <a style="float:right" class='button' href='/budgets'>View Previous Budgets</a>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
 
 
 
