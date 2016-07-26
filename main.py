@@ -68,6 +68,7 @@ class MainHandler(webapp2.RequestHandler):
             else:
                 user = User.query(User.username == username).get()
 
+
             template = jinja_environment.get_template('main.html')
             template_vals = {'user':user, 'logout_url':logout_url}
             self.response.write(template.render(template_vals))

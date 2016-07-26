@@ -7,7 +7,7 @@
     <title>Finances</title>
     <br>
     <form action="/">
-      <p><a class="button-link" href="{{logout_url}}">Log Out </a></p>
+      <button><a class="button-link" href="{{logout_url}}">Log Out </a></button>
     </form>
   </head>
   <br>
@@ -25,7 +25,7 @@
 
   <body class="center">
     <div>
-      <form action='/' method='add'>
+      <form action='/' method='post'>
         <table class="center" width = 75%>
           <tr>
             <th>Date: </th>
@@ -39,7 +39,7 @@
               <input name='date' id='datepicker'placeholder='Date eg.07/25/2016'>
             </td>
             <td>
-              <input name='name' placeholder='Item/Service eg.Rent, Electricity Bill'>
+              <input name='name' placeholder='Item/Service eg.Rent, Bills'>
             </td>
             <td>
               <input name='cost' placeholder='Cost'>
@@ -61,7 +61,7 @@
       </form>
     </div>
     <br>
-    <a class='history' href='/history?key='>View All History</a>
+    <button><a class='history' href='/history?key='>View All History</a></button>
     <br>
     <br>
     <div>
