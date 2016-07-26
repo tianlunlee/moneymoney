@@ -17,8 +17,8 @@ class User(ndb.Model):
     # university_key = ndb.KeyProperty(kind=University)
 # class CurrentBudget(ndb.Model):
 #     value = ndb.FloatProperty()
-    def create_budget(self, source_name, user_key, balance)
-        Budget(source_name, user_key, balance)
+    def create_budget(self, source_name, user_key, balance):
+        Budget(sourcename=source_name, user_key=user_key, balance=balance)
 
 class Item(ndb.Model):
     item_name = ndb.StringProperty()
@@ -56,7 +56,7 @@ class MainHandler(webapp2.RequestHandler):
         # if the user is logged in, show the main page. else show the home page
         if current_user:
             logout_url = users.CreateLogoutURL('/')
-
+            # create name based on email address
             email = current_user.email()
             username = email.rsplit('@')[0]
             #interact with db
@@ -107,6 +107,9 @@ class MainHandler(webapp2.RequestHandler):
         self.redirect('/')
 
 
+
+
 app = webapp2.WSGIApplication([
-    ('/', MainHandler)
+    ('/', MainHandler),
+
 ], debug=True)
