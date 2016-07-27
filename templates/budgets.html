@@ -133,7 +133,7 @@
             <td>{{budget.source_name}}</td>
             <td>{{budget.date}}</td>
             <td>{{budget.amount}}</td>
-            <td>{{amountSpent}}</td>
+            <td>{{budget.amount-item.remaining_balance}}</td>
             <td>{{remainingBalance}}</td>
             {% endfor %}
           </tr>

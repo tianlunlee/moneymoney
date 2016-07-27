@@ -247,9 +247,10 @@ class OldBudgetHangler(webapp2.RequestHandler):
         logout_url = users.CreateLogoutURL('/')
 
         budgets = Budget.query(Budget.user_key==user.key).order(-Budget.date).fetch()
+        item = Item.query(Item.budget_key == budget.key).order(-Item.datetime).get()
 
         template = jinja_environment.get_template('budgets.html')
-        template_vals = {'user':user, 'budgets':budgets, 'logout_url':logout_url}
+        template_vals = {'user':user, 'budgets':budgets, 'item':item,  'logout_url':logout_url}
         self.response.write(template.render(template_vals))
 
 
