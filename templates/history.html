@@ -114,7 +114,6 @@
 
 
     <br>
-    <a class= "button" href="/">Return to Finances</a>
     <br>
     <br>
     <div>
@@ -125,26 +124,35 @@
           <th>Cost: </th>
           <th>New Balance: </th>
         </tr>
-      </table>
-      <table class="center" width=75%>
         {% for i in range(0, length)%}
           <tr>
-            <td></td>
-            <td><br> Name: {{budgets[i].source_name}}</td>
-            <td><br> Start amount: {{budgets[i].amount}}</td>
-            <td></td>
+            <td><br>----------------------------</td>
+            <td style="font-size:20px"><br> Name: {{budgets[i].source_name}}</td>
+            <td style="font-size:20px"><br> Start amount: {{budgets[i].amount}}</td>
+            <td><br>----------------------------</td>
 
             {% if items[i]%}
               {% for itemss in items[i] %}
-                  <tr>
-                    <td>{{itemss.note}}</td>
-                    <td>{{itemss.item_name}}</td>
-                    <td>{{itemss.cost}}</td>
-                    <td>{{itemss.remaining_balance}}</td>
-                    {% endfor %}
-                  </tr>
+                {% if items[i].index(itemss)%2 == 0 %}
+                    <tr style="background-color: lightgray;">
+                {% else %}
+                    <tr>
                 {% endif %}
+                      <td>{{itemss.note}}</td>
+                      <td>{{itemss.item_name}}</td>
+                      <td>{{itemss.cost}}</td>
+                {% if itemss.remaining_balance <= 10 %}
+                      <td style="color: red">
+                {% elif itemss.remaining_balance <= 20 %}
+                      <td style="color: orange">
+                {% else %}
+                      <td>
+                {% endif %}
+                        {{itemss.remaining_balance}}</td>
               {% endfor %}
+                  </tr>
+            {% endif %}
+        {% endfor %}
               </table>
     </div>
     <br>

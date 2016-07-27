@@ -5,6 +5,7 @@ import jinja2
 import logging
 import webapp2
 import os
+import datetime
 
 template_dir = os.path.join(os.path.dirname(__file__), 'templates')
 jinja_environment = jinja2.Environment(
@@ -13,7 +14,7 @@ jinja_environment = jinja2.Environment(
 class User(ndb.Model):
     username = ndb.StringProperty()
     email = ndb.StringProperty()
-
+    date = ndb.DateProperty(auto_now = True)
     def history_url(self):
         return '/history?key=' + self.key.urlsafe()
 
@@ -79,15 +80,30 @@ class MainHandler(webapp2.RequestHandler):
             else:
                 user = User.query(User.username == username).get()
 
-
+            user.date = datetime.date.today()
 
             budgets = Budget.query(Budget.user_key==user.key).order(-Budget.datetime).fetch()
 
             if budgets:
                 items = Item.query(Item.budget_key==budgets[0].key).order(-Item.datetime).fetch()
-                template_vals = {'user':user, 'logout_url':logout_url, 'items':items, 'budgets':budgets}
 
                 template = jinja_environment.get_template('main.html')
+
+                user_date = user.date
+                budget_date = budgets[0].end_date
+
+                budget_split = str(budget_date).rsplit('/')
+                print budget_split
+                # calculates the difference between the budget end date and the current date
+                month = int(budget_split[0]) - int(user_date.month)
+                day = int(budget_split[1]) - int(user_date.day)
+                year = int(budget_split[2]) - int(user_date.year)
+
+                countdown = {'year':year, 'month':month, 'day':day}
+                print countdown
+                template_vals = {'user':user, 'logout_url':logout_url, 'items':items, 'budgets':budgets,
+                'countdown':countdown
+                }
 
                 self.response.write(template.render(template_vals))
             else:
@@ -110,10 +126,10 @@ class MainHandler(webapp2.RequestHandler):
 
         user = User.query(User.email == email).get()
 
-
-
         budget = Budget.query(Budget.user_key == user.key).order(-Budget.datetime).get()
         item = Item.query(Item.budget_key == budget.key).order(-Item.datetime).get()
+
+
 
         note = self.request.get('note')
         cost = self.request.get('cost')
@@ -245,6 +261,8 @@ class OldBudgetHangler(webapp2.RequestHandler):
             items.append(temp)
             if temp:
                 totalSaved += temp[0].remaining_balance
+            else:
+                totalSaved += budget.amount
 
 
 

@@ -87,6 +87,7 @@
       color: transparent;
       text-shadow: rgba(255,255,255,0.5) 0px 3px 3px;
     }
+
     #first_table{
       text-align: center;
       margin-left: 12%;
@@ -129,7 +130,17 @@
 
   <script>{{script}}</script>
 
+
     <h3 id="hello"> Hello {{user.username}},</h3>
+
+
+    <br>
+    {% if countdown.year<=0 and countdown.month<=0 and countdown.day<=0 %}
+    <h2 style="text-align: center; align-items: center; color:red"> Please create a new budget.<br>
+    {% else %}
+    <h2 style="text-align: center; align-items: center;">
+    {% endif %}
+    {{countdown.year}} Year(s) {{countdown.month}} Month(s) {{countdown.day}} Day(s) Remaining</h2>
 
     <br>
     <br>
