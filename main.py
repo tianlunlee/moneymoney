@@ -42,7 +42,7 @@ class Budget(ndb.Model):
 class Item(ndb.Model):
     item_name = ndb.StringProperty()
     cost = ndb.FloatProperty()
-    date = ndb.StringProperty()
+    note = ndb.StringProperty()
     budget_key = ndb.KeyProperty(kind=Budget)
     remaining_balance = ndb.FloatProperty()
     datetime = ndb.DateTimeProperty(auto_now_add = True)
@@ -80,9 +80,9 @@ class MainHandler(webapp2.RequestHandler):
 
 
 
-            budgets = Budget.query(Budget.user_key==user.key).order(-Budget.date, -Budget.datetime).fetch()
+            budgets = Budget.query(Budget.user_key==user.key).order(-Budget.datetime).fetch()
             if budgets:
-                items = Item.query(Item.budget_key==budgets[0].key).order(-Item.date).fetch()
+                items = Item.query(Item.budget_key==budgets[0].key).order(-Item.datetime).fetch()
                 template_vals = {'user':user, 'logout_url':logout_url, 'items':items, 'budgets':budgets}
 
                 template = jinja_environment.get_template('main.html')
@@ -112,13 +112,14 @@ class MainHandler(webapp2.RequestHandler):
 
         budget = Budget.query(Budget.user_key == user.key).get()
         item = Item.query(Item.budget_key == budget.key).order(-Item.datetime).get()
+        self.response.write(item)
         if not budget:
             script = 'alert({})'.format('You don\'t have a budget yet!')
             #alert the user that they do not currently have a budget
 
         else:
 
-            date = self.request.get('date')
+            note = self.request.get('date')
             cost = self.request.get('cost')
             if cost: # if nonempty, convert to float
                 cost = float(cost)
@@ -131,7 +132,7 @@ class MainHandler(webapp2.RequestHandler):
                 remaining_balance = item.remaining_balance - cost
 
             # interact with db
-            new_item = Item(item_name=item_name, cost=cost, date=date, budget_key=budget.key, remaining_balance=remaining_balance)
+            new_item = Item(item_name=item_name, cost=cost, note=note, budget_key=budget.key, remaining_balance=remaining_balance)
             new_item.put()
             # render
             self.redirect('/')
@@ -144,7 +145,7 @@ class HistoryHandler(webapp2.RequestHandler):
 
         budget = Budget.query(Budget.user_key == user.key).get()
 
-        items = Item.query(Item.budget_key==budget.key).order(-Item.date).fetch()
+        items = Item.query(Item.budget_key==budget.key).order(-Item.datetime).fetch()
 
         template = jinja_environment.get_template('history.html')
         template_vals = {'user':user, 'items':items}
