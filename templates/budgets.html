@@ -123,6 +123,7 @@
         <tr>
           <th>Name: </th>
           <th>Start Date: </th>
+          <th>End Date: </th>
           <th>To Spend: </th>
           <th>Amount Spent: </th>
           <th>Remained: </th>
@@ -132,6 +133,7 @@
           <tr>
             <td>{{budgets[i].source_name}}</td>
             <td>{{budgets[i].date}}</td>
+            <td>{{budgets[i].end_date}}</td>
             <td>{{budgets[i].amount}}</td>
             {% if items[i][0] %}
             <td>{{budgets[i].amount-items[i][0].remaining_balance}}</td>

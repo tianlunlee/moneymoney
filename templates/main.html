@@ -196,6 +196,12 @@
             {% else %}
             No Budget!
             {% endif %}
+            End Date:
+            {% if budgets[0] %}
+            {{budgets[0].end_date}}
+            {% else %}
+            No Budget!
+            {% endif %}
             <br>
             <br>
             To Spend:
