@@ -4,11 +4,111 @@
     <meta charset="utf-8">
     <title>Previous Budgets</title>
   </head>
-  <link rel="stylesheet" href="stylesheets/main.css">
-  <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
-  <h1>{{user.username}}'s Budget History</h1>
-  <body class="center">
-    <br>
+  <style>
+  body{
+    width:80%;
+    margin-left: 10%;
+    margin-right: 10%;
+    font-family: sans-serif;
+
+
+  }
+  #header {
+    width: 100%;
+
+  }
+  #logo{
+    padding-top: 0px;
+    padding-left: 10px;
+    padding-bottom: 0;
+  }
+  #logo_text{
+    font-size: 20px;
+
+    font-family: sans-serif;
+    text-decoration: none;
+  }
+  #logo_image{
+    width: 40px;
+    height: 40px;
+    padding-right: 5px;
+
+  }
+  #out {
+    margin-left: 662px;
+    background-color: red;
+
+  }
+
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-color: #333;
+    }
+
+    li {
+      float: left;
+    }
+
+    li a {
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+    }
+
+    a:hover:not(.active) {
+      background-color: #111;
+    }
+
+    .active {
+      background-color:#4CAF50;
+    }
+    #title {
+      background-color: black;
+      text-align: center;
+      font-size: 40px;
+      -webkit-background-clip: text;
+      -moz-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: rgba(255,255,255,0.5) 0px 3px 3px;
+    }
+
+
+
+
+  </style>
+
+
+
+  <body>
+    <div id="header">
+
+        <a href="" ><h1 id="logo_text"><img src="/images/logo.png" id="logo_image"></img>College Student Finances</h1></a>
+        <ul>
+          <li><a class="active" href="/">Home</a></li>
+          <li><a href="/">Update Finances</a></li>
+          <li><a href="/addbudget">Create New Budget</a></li>
+          <li><form action="/"><a class="button" id="out" href="{{logout_url}}">Log Out</a></form></li>
+        </ul>
+
+    </div>
+    <h1 id="title" >{{user.username}}'s Budget History</h1>
+
+
+
+
+
+
+
+
+
+
+
     <a class= "button" href="/">Return to Finances</a>
     <br>
     <br>
