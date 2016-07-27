@@ -116,34 +116,8 @@
 
 
 
-
-
-
-
-
-
-  <br>
-  <!-- {{user.name}}'s Finances -->
-  <h1 class="center">Finances</h1>
-
-<script>{{script}}</script>
-
-  <h3> Hello {{user.username}},</h3>
-  <a class= "button" style ="float: right" href="/addbudget">New Budget</a>
-  <br>
-  <br>
-  Your Current Budget:
-  {% if budgets[0] %}
-  {{budgets[0].amount}}
-  {% else %}
-  No Budget!
-  {% endif %}
-  <br>
-  <br>
-
-
-
-
+    <br>
+    <br>
 
 
 
@@ -163,10 +137,7 @@
 
           <tr>
             <td>
-              <input name='date' id='datepicker'placeholder='Date eg.07/25/2016'>
-            </td>
-            <td>
-              <input name='note' placeholder='Note eg.dates'>
+              <input name='note' placeholder='eg. date'>
             </td>
             <td>
               <input name='name' placeholder='Item/Service eg.Rent, Bills'>
@@ -196,6 +167,7 @@
       </form>
     </div>
     <br>
+    <br>
     <div>
       <table class = "budget" width = 25%>
         <tr>
@@ -209,6 +181,7 @@
 
         <tr>
           <td class = "budget">
+            <br>
             Name:
             {% if budgets[0] %}
             {{budgets[0].source_name}}
@@ -246,19 +219,6 @@
     </div>
 
 
-
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
-    <script>
-    $( function() {
-      $( "#datepicker" ).datepicker();
-    } );
-
-    </script>
-
-
-
-    <a style="float:right" class='button' href='/budgets'>View Previous Budgets</a>
 
 
 
