@@ -200,7 +200,14 @@
                     <td>{{items[i].note}}</td>
                     <td>{{items[i].item_name}}</td>
                     <td>{{items[i].cost}}</td>
-                    <td>{{items[i].remaining_balance}}</td>
+                  {% if items[i].remaining_balance <= 10 %}
+                    <td style="color:red">
+                  {% elif items[i].remaining_balance <= 20 %}
+                    <td style="color:orange">
+                  {% else %}
+                    <td>
+                  {% endif %}
+                      {{items[i].remaining_balance}}</td>
               {% endif %}
               {% endfor %}
             </tr>
