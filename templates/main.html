@@ -4,7 +4,6 @@
     <meta charset="utf-8">
     <title>Finances</title>
   </head>
-
   <style>
   body{
     width:80%;
@@ -36,7 +35,11 @@
 
   }
   #out {
+
+
+
     float:right;
+
     background-color: red;
 
   }
@@ -118,6 +121,7 @@
 
 
 
+
   <br>
   <!-- {{user.name}}'s Finances -->
   <h1 class="center">Finances</h1>
@@ -138,6 +142,13 @@
   <br>
 
 
+
+
+
+
+
+
+
   <body class="center">
 
     <div>
@@ -155,13 +166,15 @@
               <input name='date' id='datepicker'placeholder='Date eg.07/25/2016'>
             </td>
             <td>
+              <input name='note' placeholder='Note eg.dates'>
+            </td>
+            <td>
               <input name='name' placeholder='Item/Service eg.Rent, Bills'>
             </td>
             <td>
               <input name='cost' placeholder='Cost'>
             </td>
             <td>
-
             </td>
             <td>
               <p><input type="submit" value="Add"> </p>
@@ -170,16 +183,14 @@
 
           {% for i in range(0,5) %}
 
-          {% if items[i] %}
-            <tr>
-              <td>{{items[i].date}}</td>
-              <td>{{items[i].item_name}}</td>
-              <td>{{items[i].cost}}</td>
-              <td>{{items[i].remaining_balance}}</td>
+              {% if items[i] %}
+                <tr>
+                  <td>{{items[i].note}}</td>
+                  <td>{{items[i].item_name}}</td>
+                  <td>{{items[i].cost}}</td>
+                  <td>{{items[i].remaining_balance}}</td>
               {% endif %}
-
               {% endfor %}
-
             </tr>
         </table>
       </form>
@@ -224,6 +235,11 @@
 
           <td class = "budget">
             Amount Spent:
+            {% if budgets[0] and items[0] %}
+              {{budgets[0].amount - items[0].remaining_balance}}
+            {% else %}
+              None Spent!
+            {% endif %}
           </td>
         </tr>
       </table>
@@ -237,10 +253,14 @@
     $( function() {
       $( "#datepicker" ).datepicker();
     } );
+
     </script>
 
 
+
     <a style="float:right" class='button' href='/budgets'>View Previous Budgets</a>
+
+
 
     <br>
     <br>
