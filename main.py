@@ -138,8 +138,8 @@ class BudgetHandler(webapp2.RequestHandler):
         # get info
         template = jinja_environment.get_template('budget.html')
         # template_vals = {'current_budget':current_budget}
-
-        self.response.write(template.render())
+        logout_url = users.CreateLogoutURL('/')
+        self.response.write(template.render({'logout_url':logout_url}))
     def post(self):
         current_user = users.get_current_user()
         email = current_user.email()
@@ -193,12 +193,16 @@ class HistoryHandler(webapp2.RequestHandler):
         email = current_user.email()
         user = User.query(User.email == email).get()
 
+        logout_url = users.CreateLogoutURL('/')
+
         budget = Budget.query(Budget.user_key == user.key).get()
 
         items = Item.query(Item.budget_key==budget.key).order(-Item.datetime).fetch()
 
+
+
         template = jinja_environment.get_template('history.html')
-        template_vals = {'user':user, 'items':items}
+        template_vals = {'user':user, 'items':items, 'logout_url':logout_url}
         self.response.write(template.render(template_vals))
 
 
@@ -209,10 +213,12 @@ class OldBudgetHangler(webapp2.RequestHandler):
         user = User.query(User.email == email).get()
         user_key = user.key
 
+        logout_url = users.CreateLogoutURL('/')
+
         budgets = Budget.query(Budget.user_key==user.key).order(-Budget.date).fetch()
 
         template = jinja_environment.get_template('budgets.html')
-        template_vals = {'user':user, 'budgets':budgets}
+        template_vals = {'user':user, 'budgets':budgets, 'logout_url':logout_url}
         self.response.write(template.render(template_vals))
 
 
