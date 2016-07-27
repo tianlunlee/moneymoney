@@ -1,15 +1,123 @@
 <!DOCTYPE html>
 <html>
-  <link rel="stylesheet" href="stylesheets/main.css">
-  <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
   <head>
     <meta charset="utf-8">
     <title>Finances</title>
-    <br>
-    <form action="/">
-      <a class="button" href="{{logout_url}}">Log Out </a>
-    </form>
   </head>
+<<<<<<< HEAD
+  <style>
+  body{
+    width:80%;
+    margin-left: 10%;
+    margin-right: 10%;
+    font-family: sans-serif;
+
+
+  }
+  #header {
+    width: 100%;
+
+  }
+  #logo{
+    padding-top: 0px;
+    padding-left: 10px;
+    padding-bottom: 0;
+  }
+  #logo_text{
+    font-size: 20px;
+
+    font-family: sans-serif;
+    text-decoration: none;
+  }
+  #logo_image{
+    width: 40px;
+    height: 40px;
+    padding-right: 5px;
+
+  }
+  #out {
+    margin-left: 476.5px;
+    background-color: red;
+
+  }
+
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-color: #333;
+    }
+
+    li {
+      float: left;
+    }
+
+    li a {
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+    }
+
+    a:hover:not(.active) {
+      background-color: #111;
+    }
+
+    .active {
+      background-color:#4CAF50;
+    }
+    #title {
+      background-color: black;
+      text-align: center;
+      font-size: 40px;
+      -webkit-background-clip: text;
+      -moz-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: rgba(255,255,255,0.5) 0px 3px 3px;
+    }
+  </style>
+
+  <body>
+
+
+    <div id="header">
+
+        <a href="" ><h1 id="logo_text"><img src="/images/logo.png" id="logo_image"></img>College Student Finances</h1></a>
+        <ul>
+          <li><a class="active" href="/">Home</a></li>
+          <li><a href="/addbudget">Create New Budget</a></li>
+          <li><a href="/budgets">View Previous Budgets</a></li>
+          <li><a href="{{user.history_url()}}">View All History</a></li>
+          <li><form action="/"><a class="button" id="out" href="{{logout_url}}">Log Out</a></form></li>
+        </ul>
+
+    </div>
+    <!-- {{user.name}}'s Finances -->
+    <h1 id="title">Finances</h1>
+
+  <script>{{script}}</script>
+
+    <h3> Hello {{user.username}},</h3>
+  
+    <br>
+    <br>
+    Your Current Budget:
+    {% if budgets[0] %}
+      {{budgets[0].amount}}
+    {% else %}
+      No Budget!
+    {% endif %}
+
+
+
+
+
+
+
+=======
   <br>
   <!-- {{user.name}}'s Finances -->
   <h1 class="center">Finances</h1>
@@ -31,6 +139,7 @@
 
 
   <body class="center">
+>>>>>>> 4fdf45524edce74a58efffa0c40b1b4f5a059c5a
     <div>
       <form action='/' method='post'>
         <table class="center" width = 75%>
@@ -75,9 +184,6 @@
         </table>
       </form>
     </div>
-    <br>
-    <a class='history button' href='{{user.history_url()}}'>View All History</a>
-    <br>
     <br>
     <div>
       <table class = "budget" width = 25%>
@@ -124,6 +230,15 @@
     </div>
 
 
+<<<<<<< HEAD
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+    <script>
+    $( function() {
+      $( "#datepicker" ).datepicker();
+    } );
+    </script>
+=======
 
     <a style="float:right" class='button' href='/budgets'>View Previous Budgets</a>
 
@@ -132,6 +247,7 @@
     <br>
     <br>
     <br>
+>>>>>>> 4fdf45524edce74a58efffa0c40b1b4f5a059c5a
 
   </body>
 
