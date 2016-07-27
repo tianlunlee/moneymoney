@@ -8,9 +8,6 @@
   <style>
   body{
     font-family: sans-serif;
-    width: 80%;
-    margin-left: 10%;
-    margin-right: 10%;
 
 
   }
@@ -57,37 +54,15 @@
     margin-left: 30%;
   }
 
-  .header_buttons {
-    display: inline-block;
-    width: 140px;
-    height: 35px;
-    font-size: 15px;
-  }
-
-  #logo_entire{
-    margin-right: 0%;
-    display: inline-block;
-  }
-
-  #first_button{
-    margin-right: 2%;
-  }
-
-  #third_button {
-    margin-left: 2%;
-
-  }
-
-  #log_out{
-    float:right;
-    margin-top: -1%;
-    width: 80px;
-    height: 20px;
-  }
-
   #title {
+    background-color: black;
     text-align: center;
-    font-size: 30px;
+    font-size: 40px;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: rgba(255,255,255,0.5) 0px 3px 3px;
 
 
   }
@@ -123,30 +98,37 @@
     display: inline-block;
 
   }
+  #navigation{
+    width: 70%;
+
+  }
+#out {
+  margin-left: 696.5px;
+  background-color: red;
+
+}
 
   </style>
   <body>
 
     <div id="header">
-      <div class="make_inline" id="logo">
+
         <a href="" ><h1 id="logo_text"><img src="/images/logo.png" id="logo_image"></img>College Student Finances</h1></a>
-      </div>
-      <h1 id="title" class="make_inline">Calculate Budget</h1>
-    </div>
-    <div class="make_inline">
-      <ul>
-        <li><a class="active" href="">Home</a></li>
-        <li><a href="">Update Spending</a></li>
-        <li><a href="">Saving History</a></li>
-      </ul>
+        <ul>
+          <li><a class="active" href="/">Home</a></li>
+          <li><a href="">Update Spending</a></li>
+          <li><a href="">Saving History</a></li>
+          <li><form action="/"><a class="button" id="out" href="{{logout_url}}">Log Out</a></form></li>
+        </ul>
+
     </div>
 
 
 
   <link rel="stylesheet" href="stylesheets/main.css">
   <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
-  <a class="button" href="/">Return to Finances</a>
-  <body>
+
+      <h1 id="title">Calculate Budget</h1>
 
     <div>
       <form action='/addbudget' method='post'>
