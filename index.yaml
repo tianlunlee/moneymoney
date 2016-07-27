@@ -40,6 +40,11 @@ indexes:
   properties:
   - name: budget_key
   - name: datetime
+
+- kind: Item
+  properties:
+  - name: budget_key
+  - name: datetime
     direction: desc
 
 - kind: Item
