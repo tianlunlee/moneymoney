@@ -236,7 +236,7 @@ class OldBudgetHangler(webapp2.RequestHandler):
         for budget in budgets:
             temp = Item.query(Item.budget_key==budget.key).order(-Item.datetime).fetch()
             items.append(temp)
-            if items[0]:
+            if temp:
                 totalSaved += temp[0].remaining_balance
 
 
