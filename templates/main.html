@@ -22,9 +22,9 @@
   <br>
   Your Current Budget:
   {% if budgets[0] %}
-    {{budgets[0].amount}}
+  {{budgets[0].amount}}
   {% else %}
-    No Budget!
+  No Budget!
   {% endif %}
   <br>
   <br>
@@ -35,7 +35,7 @@
       <form action='/' method='post'>
         <table class="center" width = 75%>
           <tr>
-            <th>Note: </th>
+            <th>Date: </th>
             <th>Item/Service: </th>
             <th>Cost: </th>
             <th>New Balance: </th>
@@ -43,7 +43,7 @@
 
           <tr>
             <td>
-              <input name='note' placeholder='Note eg.dates'>
+              <input name='date' id='datepicker'placeholder='Date eg.07/25/2016'>
             </td>
             <td>
               <input name='name' placeholder='Item/Service eg.Rent, Bills'>
@@ -60,14 +60,17 @@
           </tr>
 
           {% for i in range(0,5) %}
-              {% if items[i] %}
-                <tr>
-                  <td>{{items[i].note}}</td>
-                  <td>{{items[i].item_name}}</td>
-                  <td>{{items[i].cost}}</td>
-                  <td>{{items[i].remaining_balance}}</td>
+
+          {% if items[i] %}
+            <tr>
+              <td>{{items[i].date}}</td>
+              <td>{{items[i].item_name}}</td>
+              <td>{{items[i].cost}}</td>
+              <td>{{items[i].remaining_balance}}</td>
               {% endif %}
+
               {% endfor %}
+
             </tr>
         </table>
       </form>
@@ -115,11 +118,6 @@
 
           <td class = "budget">
             Amount Spent:
-            {% if budgets[0] and items[0] %}
-              {{budgets[0].amount - items[0].remaining_balance}}
-            {% else %}
-              None Spent!
-            {% endif %}
           </td>
         </tr>
       </table>
@@ -134,37 +132,6 @@
     <br>
     <br>
     <br>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
-    <script>
-    $( function() {
-      $( "#datepicker" ).datepicker();
-    } );
-    </script>
 
   </body>
 

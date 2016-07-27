@@ -164,17 +164,18 @@ class BudgetHandler(webapp2.RequestHandler):
         if old_budget: # if there is an old budget
             self.refresh(old_budget, new_budget)
 
-
+        self.redirect('/')
 
     def refresh(self, old_budget, new_budget):
         items = Item.query(Item.budget_key == old_budget.key).order(Item.datetime).fetch()
         for i in range(0,len(items)):
             if i == 0:
-                items[i].remaining_balance = new_budget.amount - cost
+                items[i].remaining_balance = new_budget.amount - items[i].cost
+                Item.budget_key = new_budget.key
             else:
-                items[i].remaining_balance = item.remaining_balance - cost
-            self.response.write(items[i].remaining_balance)
-            items[i].put()
+                items[i].remaining_balance = item.remaining_balance - items[i].cost
+                Item.budget_key = new_budget.key
+
 
 
 
