@@ -139,10 +139,17 @@ class BudgetHandler(webapp2.RequestHandler):
 
     def get(self):
         # get info
+        current_user = users.get_current_user()
+        email = current_user.email()
+
+
+        user = User.query(User.email == email).get()
+
+        user_key = user.key
         template = jinja_environment.get_template('budget.html')
         # template_vals = {'current_budget':current_budget}
         logout_url = users.CreateLogoutURL('/')
-        self.response.write(template.render({'logout_url':logout_url}))
+        self.response.write(template.render({'user':user,'logout_url':logout_url}))
     def post(self):
         current_user = users.get_current_user()
         email = current_user.email()
