@@ -23,6 +23,7 @@ class Budget(ndb.Model):
     user_key = ndb.KeyProperty(kind=User)
     amount = ndb.FloatProperty()
     date = ndb.StringProperty()
+    end_date = ndb.StringProperty()
     datetime = ndb.DateTimeProperty(auto_now_add = True)
 
     # remaining = ndb.FloatProperty()
@@ -175,13 +176,14 @@ class BudgetHandler(webapp2.RequestHandler):
         source_name = self.request.get('source_name')
         amount = self.request.get('amount')
         date = self.request.get('date')
+        end_date = self.request.get('end_date')
         if amount: # if nonempty, convert to float
             amount = float(amount)
         else: # otherwise set it to 0
             amount = 0
 
         old_budget = Budget.query().order(-Budget.datetime).get()
-        new_budget = Budget(source_name=source_name, user_key=user_key, amount = amount, date = date)
+        new_budget = Budget(source_name=source_name, user_key=user_key, amount = amount, date = date, end_date=end_date)
         new_budget.put()
 
 

@@ -139,7 +139,8 @@
       <form action='/addbudget' method='post'>
         <table class="center" width = 75%>
           <tr>
-            <th>Date: </th>
+            <th>Start Date: </th>
+            <th>End Date: </th>
             <th>Source: </th>
             <th>Amount: </th>
 
@@ -147,7 +148,10 @@
 
           <tr>
             <td>
-              <input name='date' class="inline" id='datepicker' placeholder='Date eg.07/25/2016'>
+              <input name='date' class="inline" id='datepicker' placeholder='Date eg.07/11/2016'>
+            </td>
+            <td>
+              <input name='end_date' class="inline" id='datepicker2' placeholder='Date eg.07/29/2016'>
             </td>
             <td>
               <input name='source_name' class="inline" placeholder='eg. bank, cash'>
@@ -193,6 +197,9 @@
     <script>
     $( function() {
       $( "#datepicker" ).datepicker();
+    } );
+    $( function() {
+      $( "#datepicker2" ).datepicker();
     } );
     </script>
 
