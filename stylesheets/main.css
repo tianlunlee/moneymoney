@@ -9,13 +9,12 @@ table.center{
 }
 
 h1{
-  font-size: 60px;
+  font-size: 70px;
   font-weight: bolder;
-  background-color: lightgray;
   padding: 15px;
-  color: black;
-  -webkit-box-shadow: 5px 5px 15px rgba(0,0,0,0.4);
-    -moz-box-shadow: 5px 5px 15px rgba(0,0,0,0.4);
+  color: #334d4d;
+  /*-webkit-box-shadow: 5px 5px 15px rgba(0,0,0,0.4);
+    -moz-box-shadow: 5px 5px 15px rgba(0,0,0,0.4);*/
 }
 
 h2{
@@ -27,7 +26,7 @@ h3{
 }
 html{
   font-family: "Roboto";
-  background-color: white;
+  background-color: #75a3a3;
 }
 body{
   margin: 30px;
