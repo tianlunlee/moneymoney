@@ -143,12 +143,19 @@ class HistoryHandler(webapp2.RequestHandler):
         email = current_user.email()
         user = User.query(User.email == email).get()
 
-        budget = Budget.query(Budget.user_key == user.key).get()
+        budgets = Budget.query(Budget.user_key == user.key).order(-Budget.datetime).fetch()
+        # items = {}
+        # for i in range(0, len(budgets)):
+        #     items[i] = Item.query(Item.budget_key==budget.key).order(-Item.datetime).fetch()
 
-        items = Item.query(Item.budget_key==budget.key).order(-Item.datetime).fetch()
+        items = []
+        for budget in budgets:
+            items.append(Item.query(Item.budget_key==budget.key).order(-Item.datetime).fetch())
+
+        length = len(budgets)
 
         template = jinja_environment.get_template('history.html')
-        template_vals = {'user':user, 'items':items}
+        template_vals = {'user':user, 'budgets':budgets, 'items':items, 'length':length}
         self.response.write(template.render(template_vals))
 
 class BudgetHandler(webapp2.RequestHandler):
