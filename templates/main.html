@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <title>Finances</title>
   </head>
+<<<<<<< HEAD
   <style>
   body{
     width:80%;
@@ -116,11 +117,34 @@
 
 
 
+=======
+  <br>
+  <!-- {{user.name}}'s Finances -->
+  <h1 class="center">Finances</h1>
+
+<script>{{script}}</script>
+
+  <h3> Hello {{user.username}},</h3>
+  <a class= "button" style ="float: right" href="/addbudget">New Budget</a>
+  <br>
+  <br>
+  Your Current Budget:
+  {% if budgets[0] %}
+  {{budgets[0].amount}}
+  {% else %}
+  No Budget!
+  {% endif %}
+  <br>
+  <br>
+
+
+  <body class="center">
+>>>>>>> 4fdf45524edce74a58efffa0c40b1b4f5a059c5a
     <div>
       <form action='/' method='post'>
         <table class="center" width = 75%>
           <tr>
-            <th>Note: </th>
+            <th>Date: </th>
             <th>Item/Service: </th>
             <th>Cost: </th>
             <th>New Balance: </th>
@@ -128,7 +152,7 @@
 
           <tr>
             <td>
-              <input name='note' placeholder='Note eg.dates'>
+              <input name='date' id='datepicker'placeholder='Date eg.07/25/2016'>
             </td>
             <td>
               <input name='name' placeholder='Item/Service eg.Rent, Bills'>
@@ -145,14 +169,17 @@
           </tr>
 
           {% for i in range(0,5) %}
-              {% if items[i] %}
-                <tr>
-                  <td>{{items[i].note}}</td>
-                  <td>{{items[i].item_name}}</td>
-                  <td>{{items[i].cost}}</td>
-                  <td>{{items[i].remaining_balance}}</td>
+
+          {% if items[i] %}
+            <tr>
+              <td>{{items[i].date}}</td>
+              <td>{{items[i].item_name}}</td>
+              <td>{{items[i].cost}}</td>
+              <td>{{items[i].remaining_balance}}</td>
               {% endif %}
+
               {% endfor %}
+
             </tr>
         </table>
       </form>
@@ -197,17 +224,13 @@
 
           <td class = "budget">
             Amount Spent:
-            {% if budgets[0] and items[0] %}
-              {{budgets[0].amount - items[0].remaining_balance}}
-            {% else %}
-              None Spent!
-            {% endif %}
           </td>
         </tr>
       </table>
     </div>
 
 
+<<<<<<< HEAD
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
     <script>
@@ -215,6 +238,16 @@
       $( "#datepicker" ).datepicker();
     } );
     </script>
+=======
+
+    <a style="float:right" class='button' href='/budgets'>View Previous Budgets</a>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+>>>>>>> 4fdf45524edce74a58efffa0c40b1b4f5a059c5a
 
   </body>
 
