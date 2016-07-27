@@ -81,6 +81,7 @@ class MainHandler(webapp2.RequestHandler):
 
 
             budgets = Budget.query(Budget.user_key==user.key).order(-Budget.datetime).fetch()
+
             if budgets:
                 items = Item.query(Item.budget_key==budgets[0].key).order(-Item.datetime).fetch()
                 template_vals = {'user':user, 'logout_url':logout_url, 'items':items, 'budgets':budgets}
@@ -161,20 +162,20 @@ class BudgetHandler(webapp2.RequestHandler):
         new_budget.put()
 
 
-        if old_budget: # if there is an old budget
-            self.refresh(old_budget, new_budget)
+        # if old_budget: # if there is an old budget
+        #     self.refresh(old_budget, new_budget)
 
         self.redirect('/')
 
-    def refresh(self, old_budget, new_budget):
-        items = Item.query(Item.budget_key == old_budget.key).order(Item.datetime).fetch()
-        for i in range(0,len(items)):
-            if i == 0:
-                items[i].remaining_balance = new_budget.amount - items[i].cost
-                Item.budget_key = new_budget.key
-            else:
-                items[i].remaining_balance = item.remaining_balance - items[i].cost
-                Item.budget_key = new_budget.key
+    # def refresh(self, old_budget, new_budget):
+    #     items = Item.query(Item.budget_key == old_budget.key).order(Item.datetime).fetch()
+    #     for i in range(0,len(items)):
+    #         if i == 0:
+    #             items[i].remaining_balance = new_budget.amount - items[i].cost
+    #             Item.budget_key = new_budget.key
+    #         else:
+    #             items[i].remaining_balance = item.remaining_balance - items[i].cost
+    #             Item.budget_key = new_budget.key
 
 
 
