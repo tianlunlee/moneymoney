@@ -128,10 +128,10 @@ class MainHandler(webapp2.RequestHandler):
             remaining_balance = item.remaining_balance - cost
 
             # interact with db
-            new_item = Item(item_name=item_name, cost=cost, note=note, budget_key=budget.key, remaining_balance=remaining_balance)
-            new_item.put()
+        new_item = Item(item_name=item_name, cost=cost, note=note, budget_key=budget.key, remaining_balance=remaining_balance)
+        new_item.put()
             # render
-            self.redirect('/')
+        self.redirect('/')
 
 
 
