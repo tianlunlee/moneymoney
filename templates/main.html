@@ -5,11 +5,17 @@
     <title>Finances</title>
   </head>
   <style>
+  html {
+
+    background-color: white;
+  }
   body{
     width:80%;
     margin-left: 10%;
-    margin-right: 10%;
     font-family: sans-serif;
+    background-color: #F1F1F1;
+    margin-top: -.9%;
+    padding-bottom: 10%;
 
 
   }
@@ -81,6 +87,26 @@
       color: transparent;
       text-shadow: rgba(255,255,255,0.5) 0px 3px 3px;
     }
+    #first_table{
+      text-align: center;
+      margin-left: 12%;
+
+    }
+    #current_budget{
+      font-size: 25px;
+      font-weight: bold;
+      text-align: center;
+    }
+    #hello {
+      margin-left: 5%;
+
+    }
+    #first_row{
+      border: 2px solid black;
+
+    }
+
+
   </style>
 
   <body>
@@ -103,36 +129,36 @@
 
   <script>{{script}}</script>
 
-    <h3> Hello {{user.username}},</h3>
+    <h3 id="hello"> Hello {{user.username}},</h3>
 
     <br>
     <br>
+
+    <div id="current_budget">
     Your Current Budget:
     {% if budgets[0] %}
       {{budgets[0].amount}}
     {% else %}
       No Budget!
     {% endif %}
-
-
+    </div>
 
     <br>
     <br>
 
 
 
-
-
+  <div id="first_table">
   <body class="center">
 
     <div>
       <form action='/' method='post'>
-        <table class="center" width = 75%>
-          <tr>
-            <th>Note: </th>
-            <th>Item/Service: </th>
-            <th>Cost: </th>
-            <th>New Balance: </th>
+        <table width="90%">
+          <tr id="first_row">
+            <th class="graph" >Note: </th>
+            <th class="graph" >Item/Service: </th>
+            <th class="graph" >Cost: </th>
+            <th class="graph" >New Balance: </th>
           </tr>
 
           <tr>
@@ -166,6 +192,7 @@
         </table>
       </form>
     </div>
+  </div>
     <br>
     <br>
     <div>
