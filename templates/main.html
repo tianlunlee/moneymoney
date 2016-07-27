@@ -5,11 +5,17 @@
     <title>Finances</title>
   </head>
   <style>
+  html {
+
+    background-color: white;
+  }
   body{
     width:80%;
     margin-left: 10%;
-    margin-right: 10%;
     font-family: sans-serif;
+    background-color: #F1F1F1;
+    margin-top: -.9%;
+    padding-bottom: 10%;
 
 
   }
@@ -82,6 +88,26 @@
       text-shadow: rgba(255,255,255,0.5) 0px 3px 3px;
     }
 
+    #first_table{
+      text-align: center;
+      margin-left: 12%;
+
+    }
+    #current_budget{
+      font-size: 25px;
+      font-weight: bold;
+      text-align: center;
+    }
+    #hello {
+      margin-left: 5%;
+
+    }
+    #first_row{
+      border: 2px solid black;
+
+    }
+
+
   </style>
 
   <body>
@@ -104,7 +130,10 @@
 
   <script>{{script}}</script>
 
-    <h3> Hello {{user.username}},</h3>
+
+    <h3 id="hello"> Hello {{user.username}},</h3>
+
+
     <br>
     {% if countdown.year<=0 and countdown.month<=0 and countdown.day<=0 %}
     <h2 style="text-align: center; align-items: center; color:red"> Please create a new budget.<br>
@@ -112,34 +141,35 @@
     <h2 style="text-align: center; align-items: center;">
     {% endif %}
     {{countdown.year}} Year(s) {{countdown.month}} Month(s) {{countdown.day}} Day(s) Remaining</h2>
+
     <br>
     <br>
+
+    <div id="current_budget">
     Your Current Budget:
     {% if budgets[0] %}
       {{budgets[0].amount}}
     {% else %}
       No Budget!
     {% endif %}
-
-
+    </div>
 
     <br>
     <br>
 
 
 
-
-
+  <div id="first_table">
   <body class="center">
 
     <div>
       <form action='/' method='post'>
-        <table class="center" width = 75%>
-          <tr>
-            <th>Note: </th>
-            <th>Item/Service: </th>
-            <th>Cost: </th>
-            <th>New Balance: </th>
+        <table width="90%">
+          <tr id="first_row">
+            <th class="graph" >Note: </th>
+            <th class="graph" >Item/Service: </th>
+            <th class="graph" >Cost: </th>
+            <th class="graph" >New Balance: </th>
           </tr>
 
           <tr>
@@ -162,17 +192,29 @@
           {% for i in range(0,5) %}
 
               {% if items[i] %}
-                <tr>
-                  <td>{{items[i].note}}</td>
-                  <td>{{items[i].item_name}}</td>
-                  <td>{{items[i].cost}}</td>
-                  <td>{{items[i].remaining_balance}}</td>
+                {% if i%2==0 %}
+                  <tr style="background-color:lightgray">
+                {% else %}
+                  <tr>
+                {% endif %}
+                    <td>{{items[i].note}}</td>
+                    <td>{{items[i].item_name}}</td>
+                    <td>{{items[i].cost}}</td>
+                  {% if items[i].remaining_balance <= 10 %}
+                    <td style="color:red">
+                  {% elif items[i].remaining_balance <= 20 %}
+                    <td style="color:orange">
+                  {% else %}
+                    <td>
+                  {% endif %}
+                      {{items[i].remaining_balance}}</td>
               {% endif %}
               {% endfor %}
             </tr>
         </table>
       </form>
     </div>
+  </div>
     <br>
     <br>
     <div>
