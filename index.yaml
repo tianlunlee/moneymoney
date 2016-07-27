@@ -13,6 +13,11 @@ indexes:
 - kind: Budget
   properties:
   - name: user_key
+  - name: datetime
+
+- kind: Budget
+  properties:
+  - name: user_key
   - name: date
     direction: desc
 

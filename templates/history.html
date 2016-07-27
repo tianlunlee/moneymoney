@@ -10,7 +10,8 @@
     margin-left: 10%;
     margin-right: 10%;
     font-family: sans-serif;
-
+    text-align: center;
+    align-items: center;
 
   }
   #header {
@@ -78,7 +79,15 @@
       text-shadow: rgba(255,255,255,0.5) 0px 3px 3px;
     }
 
+    .center{
+      text-align: center;
+      align-items: center;
+    }
 
+    table.center{
+        margin-left:auto;
+        margin-right:auto;
+    }
 
 
   </style>
@@ -117,16 +126,23 @@
           <th>Cost: </th>
           <th>New Balance: </th>
         </tr>
-
-        {% for item in items %}
-          <tr>
-            <td>{{item.note}}</td>
-            <td>{{item.item_name}}</td>
-            <td>{{item.cost}}</td>
-            <td>{{item.remaining_balance}}</td>
-            {% endfor %}
-          </tr>
       </table>
+        {% for i in range(0, length)%}
+          <p class="center">Name: {{budgets[i].source_name}} &nbsp; Start amount: {{budgets[i].amount}}</p>
+          <table class="center" width=75%>
+            {% if items[i]%}
+              {% for itemss in items[i] %}
+                  <tr>
+                    <td>{{itemss.note}}</td>
+                    <td>{{itemss.item_name}}</td>
+                    <td>{{itemss.cost}}</td>
+                    <td>{{itemss.remaining_balance}}</td>
+                    {% endfor %}
+                  </tr>
+                </table>
+                {% endif %}
+              {% endfor %}
+
     </div>
     <br>
   </body>
