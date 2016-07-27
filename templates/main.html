@@ -192,11 +192,15 @@
           {% for i in range(0,5) %}
 
               {% if items[i] %}
-                <tr>
-                  <td>{{items[i].note}}</td>
-                  <td>{{items[i].item_name}}</td>
-                  <td>{{items[i].cost}}</td>
-                  <td>{{items[i].remaining_balance}}</td>
+                {% if i%2==0 %}
+                  <tr style="background-color:lightgray">
+                {% else %}
+                  <tr>
+                {% endif %}
+                    <td>{{items[i].note}}</td>
+                    <td>{{items[i].item_name}}</td>
+                    <td>{{items[i].cost}}</td>
+                    <td>{{items[i].remaining_balance}}</td>
               {% endif %}
               {% endfor %}
             </tr>
