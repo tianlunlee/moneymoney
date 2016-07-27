@@ -35,7 +35,7 @@
 
   }
   #out {
-  
+
     background-color: red;
 
   }
@@ -112,7 +112,7 @@
     <a class= "button" href="/">Return to Finances</a>
     <br>
     <br>
-    <h2 style="float:right">Total saved lifetime: {{total}}</h2>
+    <h2 style="float:right">Total saved lifetime: {{totalSaved}}</h2>
     <br>
     <br>
     <br>
@@ -128,13 +128,15 @@
           <th>Remained: </th>
         </tr>
 
-        {% for budget in budgets %}
+        {% for i in range(0,length) %}
           <tr>
-            <td>{{budget.source_name}}</td>
-            <td>{{budget.date}}</td>
-            <td>{{budget.amount}}</td>
-            <td>{{amountSpent}}</td>
-            <td>{{remainingBalance}}</td>
+            <td>{{budgets[i].source_name}}</td>
+            <td>{{budgets[i].date}}</td>
+            <td>{{budgets[i].amount}}</td>
+            {% if items[i][0] %}
+            <td>{{budgets[i].amount-items[i][0].remaining_balance}}</td>
+            <td>{{items[i][0].remaining_balance}}</td>
+            {% endif %}
             {% endfor %}
           </tr>
       </table>
