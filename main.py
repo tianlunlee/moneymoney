@@ -13,7 +13,7 @@ jinja_environment = jinja2.Environment(
 class User(ndb.Model):
     username = ndb.StringProperty()
     email = ndb.StringProperty()
-
+    date = ndb.DateProperty(auto_now_add = True)
     def history_url(self):
         return '/history?key=' + self.key.urlsafe()
 
@@ -78,8 +78,6 @@ class MainHandler(webapp2.RequestHandler):
                 user.put()
             else:
                 user = User.query(User.username == username).get()
-
-
 
             budgets = Budget.query(Budget.user_key==user.key).order(-Budget.datetime).fetch()
 
