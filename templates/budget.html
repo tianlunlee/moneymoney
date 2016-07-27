@@ -4,10 +4,150 @@
     <meta charset="utf-8">
     <title>Add Budget</title>
   </head>
+
+  <style>
+  body{
+    font-family: sans-serif;
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+
+
+  }
+  #header {
+    width: 100%;
+
+  }
+  #logo{
+    padding-top: 0px;
+    padding-left: 10px;
+    padding-bottom: 0;
+  }
+  #logo_text{
+    font-size: 20px;
+
+    font-family: sans-serif;
+    text-decoration: none;
+  }
+  #logo_image{
+    width: 40px;
+    height: 40px;
+    padding-right: 5px;
+
+  }
+
+  table {
+    border: 5px solid black;
+    width: 100%;
+
+  }
+
+  tr {
+    border: 2px solid black;
+  }
+
+  th {
+    border: 2px solid black;
+  }
+
+  td {
+    border: 2px solid black;
+  }
+  .inline {
+    margin-left: 30%;
+  }
+
+  .header_buttons {
+    display: inline-block;
+    width: 140px;
+    height: 35px;
+    font-size: 15px;
+  }
+
+  #logo_entire{
+    margin-right: 0%;
+    display: inline-block;
+  }
+
+  #first_button{
+    margin-right: 2%;
+  }
+
+  #third_button {
+    margin-left: 2%;
+
+  }
+
+  #log_out{
+    float:right;
+    margin-top: -1%;
+    width: 80px;
+    height: 20px;
+  }
+
+  #title {
+    text-align: center;
+    font-size: 30px;
+
+
+  }
+
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+  }
+
+  li {
+    float: left;
+  }
+
+  li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+
+  a:hover:not(.active) {
+    background-color: #111;
+  }
+
+  .active {
+    background-color:#4CAF50;
+  }
+  .make_inline{
+    display: inline-block;
+
+  }
+
+  </style>
+  <body>
+
+    <div id="header">
+      <div class="make_inline" id="logo">
+        <a href="" ><h1 id="logo_text"><img src="/images/logo.png" id="logo_image"></img>College Student Finances</h1></a>
+      </div>
+      <h1 id="title" class="make_inline">Calculate Budget</h1>
+    </div>
+    <div class="make_inline">
+      <ul>
+        <li><a class="active" href="">Home</a></li>
+        <li><a href="">Update Spending</a></li>
+        <li><a href="">Saving History</a></li>
+      </ul>
+    </div>
+
+
+
   <link rel="stylesheet" href="stylesheets/main.css">
   <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
   <a class="button" href="/">Return to Finances</a>
   <body>
+
     <div>
       <form action='/addbudget' method='post'>
         <table class="center" width = 75%>
@@ -20,13 +160,13 @@
 
           <tr>
             <td>
-              <input name='date' id='datepicker'placeholder='Date eg.07/25/2016'>
+              <input name='date' class="inline" id='datepicker' placeholder='Date eg.07/25/2016'>
             </td>
             <td>
-              <input name='source_name' placeholder='eg. bank, cash'>
+              <input name='source_name' class="inline" placeholder='eg. bank, cash'>
             </td>
             <td>
-              <input name='amount' placeholder='Amount'>
+              <input name='amount' class="inline" placeholder='Amount'>
             </td>
             <td>
               <!-- line below creates a button that allows submission -->
