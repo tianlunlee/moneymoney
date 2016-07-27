@@ -126,9 +126,14 @@
           <th>New Balance: </th>
         </tr>
       </table>
+      <table class="center" width=75%>
         {% for i in range(0, length)%}
-          <p class="center">Name: {{budgets[i].source_name}} &nbsp; Start amount: {{budgets[i].amount}}</p>
-          <table class="center" width=75%>
+          <tr>
+            <td></td>
+            <td><br> Name: {{budgets[i].source_name}}</td>
+            <td><br> Start amount: {{budgets[i].amount}}</td>
+            <td></td>
+
             {% if items[i]%}
               {% for itemss in items[i] %}
                   <tr>
@@ -138,10 +143,9 @@
                     <td>{{itemss.remaining_balance}}</td>
                     {% endfor %}
                   </tr>
-                </table>
                 {% endif %}
               {% endfor %}
-
+              </table>
     </div>
     <br>
   </body>
