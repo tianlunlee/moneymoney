@@ -15,7 +15,7 @@
     <div>
       <table class="center" width = 75%>
         <tr>
-          <th>Date: </th>
+          <th>Note: </th>
           <th>Item/Service: </th>
           <th>Cost: </th>
           <th>New Balance: </th>
@@ -23,7 +23,7 @@
 
         {% for item in items %}
           <tr>
-            <td>{{item.date}}</td>
+            <td>{{item.note}}</td>
             <td>{{item.item_name}}</td>
             <td>{{item.cost}}</td>
             <td>{{item.remaining_balance}}</td>

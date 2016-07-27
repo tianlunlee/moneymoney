@@ -119,7 +119,7 @@ class MainHandler(webapp2.RequestHandler):
 
         else:
 
-            note = self.request.get('date')
+            note = self.request.get('note')
             cost = self.request.get('cost')
             if cost: # if nonempty, convert to float
                 cost = float(cost)
