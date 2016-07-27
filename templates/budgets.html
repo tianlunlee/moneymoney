@@ -150,6 +150,9 @@
                 <td>
               {% endif %}
                 {{items[i][0].remaining_balance}}</td>
+            {% else %}
+              <td>0</td>
+              <td>{{budgets[i].amount}}</td>
             {% endif %}
             {% endfor %}
           </tr>

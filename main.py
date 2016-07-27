@@ -261,6 +261,8 @@ class OldBudgetHangler(webapp2.RequestHandler):
             items.append(temp)
             if temp:
                 totalSaved += temp[0].remaining_balance
+            else:
+                totalSaved += budget.amount
 
 
 
