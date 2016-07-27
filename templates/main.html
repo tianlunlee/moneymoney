@@ -110,12 +110,18 @@
       No Budget!
     {% endif %}
 
+    <br>
+    <br>
 
 
 
+<<<<<<< HEAD
 
 
 
+=======
+  <body class="center">
+>>>>>>> bb532e22b207e2a0f4ebbf3d6fb8053769e38632
     <div>
       <form action='/' method='post'>
         <table class="center" width = 75%>
@@ -128,10 +134,14 @@
 
           <tr>
             <td>
+<<<<<<< HEAD
               <input name='note' placeholder='Note eg.dates'>
+=======
+              <input name='date' id='datepicker'placeholder='notes eg. date'>
+>>>>>>> bb532e22b207e2a0f4ebbf3d6fb8053769e38632
             </td>
             <td>
-              <input name='name' placeholder='Item/Service eg.Rent, Bills'>
+              <input name='name' placeholder='Item/Service eg. Rent, Bills'>
             </td>
             <td>
               <input name='cost' placeholder='Cost'>
@@ -145,18 +155,29 @@
           </tr>
 
           {% for i in range(0,5) %}
+<<<<<<< HEAD
               {% if items[i] %}
                 <tr>
                   <td>{{items[i].note}}</td>
                   <td>{{items[i].item_name}}</td>
                   <td>{{items[i].cost}}</td>
                   <td>{{items[i].remaining_balance}}</td>
+=======
+
+          {% if items[i] %}
+            <tr>
+              <td>{{items[i].note}}</td>
+              <td>{{items[i].item_name}}</td>
+              <td>{{items[i].cost}}</td>
+              <td>{{items[i].remaining_balance}}</td>
+>>>>>>> bb532e22b207e2a0f4ebbf3d6fb8053769e38632
               {% endif %}
               {% endfor %}
             </tr>
         </table>
       </form>
     </div>
+    <br>
     <br>
     <div>
       <table class = "budget" width = 25%>
@@ -168,9 +189,10 @@
             Actual
           </th>
         </tr>
-
+        <br>
         <tr>
           <td class = "budget">
+            <br>
             Name:
             {% if budgets[0] %}
             {{budgets[0].source_name}}
@@ -207,6 +229,7 @@
       </table>
     </div>
 
+<<<<<<< HEAD
 
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
@@ -215,6 +238,13 @@
       $( "#datepicker" ).datepicker();
     } );
     </script>
+=======
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+>>>>>>> bb532e22b207e2a0f4ebbf3d6fb8053769e38632
 
   </body>
 

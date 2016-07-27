@@ -126,11 +126,34 @@ class MainHandler(webapp2.RequestHandler):
         else:
             remaining_balance = item.remaining_balance - cost
 
-        # interact with db
-        new_item = Item(item_name=item_name, cost=cost, note=note, budget_key=budget.key, remaining_balance=remaining_balance)
-        new_item.put()
-        # render
-        self.redirect('/')
+            # interact with db
+            new_item = Item(item_name=item_name, cost=cost, note=note, budget_key=budget.key, remaining_balance=remaining_balance)
+            new_item.put()
+            # render
+            self.redirect('/')
+
+class HistoryHandler(webapp2.RequestHandler):
+    def get(self):
+        current_user = users.get_current_user()
+        email = current_user.email()
+        user = User.query(User.email == email).get()
+
+        budgets = Budget.query(Budget.user_key == user.key).order(-Budget.datetime).fetch()
+        # items = {}
+        # for i in range(0, len(budgets)):
+        #     items[i] = Item.query(Item.budget_key==budget.key).order(-Item.datetime).fetch()
+
+        items = []
+        for budget in budgets:
+            items.append(Item.query(Item.budget_key==budget.key).order(-Item.datetime).fetch())
+
+        length = len(budgets)
+
+        template = jinja_environment.get_template('history.html')
+        template_vals = {'user':user, 'budgets':budgets, 'items':items, 'length':length}
+        self.response.write(template.render(template_vals))
+
+
 
 class BudgetHandler(webapp2.RequestHandler):
 
@@ -195,14 +218,20 @@ class HistoryHandler(webapp2.RequestHandler):
 
         logout_url = users.CreateLogoutURL('/')
 
-        budget = Budget.query(Budget.user_key == user.key).get()
 
-        items = Item.query(Item.budget_key==budget.key).order(-Item.datetime).fetch()
+
+        budgets = Budget.query(Budget.user_key == user.key).order(Budget.datetime).fetch()
+
+        items=[]
+        length = len(budgets)
+
+        for budget in budgets:
+            items.append(Item.query(Item.budget_key==budget.key).order(-Item.datetime).fetch())
 
 
 
         template = jinja_environment.get_template('history.html')
-        template_vals = {'user':user, 'items':items, 'logout_url':logout_url}
+        template_vals = {'user':user, 'items':items, 'budgets':budgets, 'length':length, 'logout_url':logout_url}
         self.response.write(template.render(template_vals))
 
 
