@@ -115,6 +115,11 @@
 
           <td class = "budget">
             Amount Spent:
+            {% if budgets[0] and items[0] %}
+              {{budgets[0].amount - items[0].remaining_balance}}
+            {% else %}
+              None Spent!
+            {% endif %}
           </td>
         </tr>
       </table>
