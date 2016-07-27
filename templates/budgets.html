@@ -113,7 +113,12 @@
 
     <br>
     <br>
-    <h2 style="float:right">Total saved lifetime: {{totalSaved}}</h2>
+    {% if totalSaved <= 0%}
+    <h2 style="float:right; color:red;">
+    {% else %}
+    <h2 style="float:right">
+    {% endif %}
+    Total saved lifetime: {{totalSaved}}</h2>
     <br>
     <br>
     <br>
