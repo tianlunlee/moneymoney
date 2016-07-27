@@ -110,7 +110,7 @@ class MainHandler(webapp2.RequestHandler):
 
 
 
-        budget = Budget.query(Budget.user_key == user.key).get()
+        budget = Budget.query(Budget.user_key == user.key).order(-Budget.datetime).get()
         item = Item.query(Item.budget_key == budget.key).order(-Item.datetime).get()
 
         note = self.request.get('note')
