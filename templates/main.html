@@ -185,7 +185,7 @@
     #add_box{
       border-top: none;
       border-right: none;
-      
+
     }
     tr{
       border-right: 2px solid black;
@@ -380,6 +380,7 @@
             <b class="name">Balance Left Over:</b>
 
             {% if budgets[0] and items[0] %}
+
               {% if items[0].remaining_balance/budgets[0].amount <= 0.2 %}
                 <div class="name" style="color:red">
               {% elif items[0].remaining_balance/budgets[0].amount <= 0.5 %}
@@ -389,7 +390,7 @@
               {% endif %}
                   ${{items[0].remaining_balance}}</div>
             {% else %}
-            <div class="name">None Spent!</div>
+              <div class="name">None Spent!</div>
             {% endif %}
             </td>
 
