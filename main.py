@@ -315,6 +315,8 @@ class ModifyBudgetHandler(webapp2.RequestHandler):
         items= Item.query(Item.budget_key == budget.key).order(-Item.datetime).fetch()
         item_length = len(items)
 
+
+        user.date = datetime.date.today()
         user_date = user.date
         budget_date = budget.end_date
         budget_split = budget_date.rsplit('/')
