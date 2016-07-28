@@ -8,6 +8,8 @@ import os
 
 import datetime
 from datetime import date
+from decimal import Decimal
+
 template_dir = os.path.join(os.path.dirname(__file__), 'templates')
 jinja_environment = jinja2.Environment(
   loader=jinja2.FileSystemLoader(template_dir))
@@ -143,6 +145,7 @@ class MainHandler(webapp2.RequestHandler):
         else:
             remaining_balance = item.remaining_balance - cost
 
+        remaining_balance = round(Decimal(remaining_balance), 2)
             # interact with db
         new_item = Item(item_name=item_name, cost=cost, note=note, budget_key=budget.key, remaining_balance=remaining_balance,user_key=user.key)
         new_item.put()
@@ -183,7 +186,7 @@ class BudgetHandler(webapp2.RequestHandler):
             amount = float(amount)
         else: # otherwise set it to 0
             amount = 0
-
+        amount = round(Decimal(amount), 2)
         old_budget = Budget.query().order(-Budget.datetime).get()
         new_budget = Budget(source_name=source_name, user_key=user_key, amount = amount, date = date, end_date=end_date)
         new_budget.put()
