@@ -382,6 +382,7 @@
             <b class="name">Balance Left Over:</b>
 
             {% if budgets[0] and items[0] %}
+
               {% if items[0].remaining_balance/budgets[0].amount <= 0.2 %}
                 <div class="name" style="color:red">
               {% elif items[0].remaining_balance/budgets[0].amount <= 0.5 %}
