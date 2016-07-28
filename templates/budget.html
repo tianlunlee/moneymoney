@@ -172,7 +172,7 @@
 
         <h1 id="logo_text"><img src="/images/logo.png" id="logo_image"></img>College Student Finances</h1>
         <ul>
-          <li><a  href="/" id="home">Home</a></li>
+          <li><a href="/" id="home">Home</a></li>
           <li><a href="/addbudget" class="active">Create New Budget</a></li>
           <li><a href="/budgets">View Previous Budgets</a></li>
           <li><a href="{{user.history_url()}}">View All History</a></li>
@@ -204,16 +204,16 @@
 
           <tr>
             <td>
-              <input name='date' class="inline" id='from' placeholder='Date eg.07/11/2016'>
+              <input name='date' class="inline" id='from' placeholder='Date eg.07/11/2016' required>
             </td>
             <td>
-              <input name='end_date' class="inline" id='to' placeholder='Date eg.07/29/2016'>
+              <input name='end_date' class="inline" id='to' placeholder='Date eg.07/29/2016' required>
             </td>
             <td>
-              <input name='source_name' class="inline" placeholder='eg. Quarter1'>
+              <input name='source_name' class="inline" placeholder='eg. Quarter1' required>
             </td>
             <td>
-              <input name='amount' class="inline" placeholder='Amount'>
+              <input name='amount' class="inline" placeholder='Amount' type="number" required>
             </td>
             <td id="add_box">
               <!-- line below creates a button that allows submission -->
