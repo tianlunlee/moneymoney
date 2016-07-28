@@ -250,7 +250,11 @@
       {% else %}
       <div class="name">No Budget!</div>
       {% endif %}
+<<<<<<< HEAD
 
+=======
+      &nbsp;
+>>>>>>> b2f465ec7a1e1b0a75bff2e3bd5969064f566ac3
       <div class="name" id="b_name">End Date:</div>
       {% if budgets[0] %}
       <div class="name">{{budgets[0].end_date}}</div>
@@ -262,12 +266,17 @@
 
     </table>
 
+<<<<<<< HEAD
     {% if countdown.year<=0 and countdown.month<=0 and countdown.day<=0 %}
+=======
+    <br>
+    {% if countdown.days<=0 %}
+>>>>>>> b2f465ec7a1e1b0a75bff2e3bd5969064f566ac3
     <h2 style="text-align: center; align-items: center; color:red"> Please create a new budget.<br>
     {% else %}
     <h2 style="text-align: center; align-items: center;">
     {% endif %}
-    {{countdown.year}} Year(s) {{countdown.month}} Month(s) {{countdown.day}} Day(s) Remaining</h2>
+    {{countdown.days}} Day(s) Remaining</h2>
 
     <br>
     <br>
@@ -330,9 +339,9 @@
                     <td>{{items[i].note}}</td>
                     <td>{{items[i].item_name}}</td>
                     <td>{{items[i].cost}}</td>
-                  {% if items[i].remaining_balance <= 10 %}
+                  {% if items[i].remaining_balance/budgets[0].amount <= 0.2 %}
                     <td style="color:red">
-                  {% elif items[i].remaining_balance <= 20 %}
+                  {% elif items[i].remaining_balance/budgets[0].amount <= 0.5 %}
                     <td style="color:orange">
                   {% else %}
                     <td>
@@ -371,7 +380,14 @@
             <b class="name">Balance Left Over:</b>
 
             {% if budgets[0] and items[0] %}
-            <div class="name"> ${{items[0].remaining_balance}}</div>
+              {% if items[0].remaining_balance/budgets[0].amount <= 0.2 %}
+                <div class="name" style="color:red">
+              {% elif items[0].remaining_balance/budgets[0].amount <= 0.5 %}
+                <div class="name" style="color:orange">
+              {% else %}
+                <div class="name">
+              {% endif %}
+                  ${{items[0].remaining_balance}}</div>
             {% else %}
             <div class="name">None Spent!</div>
             {% endif %}
