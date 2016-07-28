@@ -167,7 +167,7 @@
         {% else %}
           <tr>
         {% endif %}
-            <td>{{budgets[i].source_name}}</td>
+            <td><a href="/modifybudget?key={{budgets[i].key.urlsafe()}}">{{budgets[i].source_name}}</a></td>
             <td>{{budgets[i].date}}</td>
             <td>{{budgets[i].end_date}}</td>
             <td>${{budgets[i].amount}}</td>
