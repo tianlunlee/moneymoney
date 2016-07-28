@@ -95,7 +95,7 @@
         margin-right:auto;
     }
     #total_saved{
-      margin-right: 10%;
+      text-align: center;
 
     }
     #add_button{
@@ -123,8 +123,12 @@
 
     }
     #home:hover{
+      background-color:;
+    }
+    #view:hover{
       background-color: darkgreen;
     }
+
 
   </style>
 
@@ -138,7 +142,7 @@
         <ul>
           <li><a  href="/" id="home" >Home</a></li>
           <li><a href="/addbudget">Create New Budget</a></li>
-          <li><a href="/budgets" class="active">View Previous Budgets</a></li>
+          <li><a href="/budgets" class="active" id="view">View Previous Budgets</a></li>
           <li><a href="{{user.history_url()}}">View All History</a></li>
           <li style="float: right"><form action="/"><a class="button" id="out" href="{{logout_url}}">Log Out</a></form></li>
         </ul>
@@ -151,13 +155,11 @@
     <br>
 
     {% if totalSaved <= 0%}
-    <h2 style="float:right; color:red;">
+    <h2 id="total_saved" style="color:red;">
     {% else %}
-    <h2 style="float:right" id="total_saved">
+    <h2 id="total_saved">
     {% endif %}
     Total saved lifetime: ${{totalSaved}}</h2>
-    <br>
-    <br>
     <br>
     <br>
     <br>

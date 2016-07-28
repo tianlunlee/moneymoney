@@ -115,6 +115,9 @@
 
     }
     #home:hover{
+      background-color:;
+    }
+    #history:hover{
       background-color: darkgreen;
     }
 
@@ -133,7 +136,7 @@
           <li><a href="/" id="home">Home</a></li>
           <li><a href="/addbudget">Create New Budget</a></li>
           <li><a href="/budgets">View Previous Budgets</a></li>
-          <li><a href="{{user.history_url()}}" class="active">View All History</a></li>
+          <li><a href="{{user.history_url()}}" class="active" id="history">View All History</a></li>
           <li style="float: right"><form action="/"><a class="button" id="out" href="{{logout_url}}">Log Out</a></form></li>
         </ul>
 
