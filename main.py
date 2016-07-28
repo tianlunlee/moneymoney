@@ -276,16 +276,21 @@ class OldBudgetHangler(webapp2.RequestHandler):
             else:
                 totalSaved += budget.amount
 
-
-
-
-
-
-
         template = jinja_environment.get_template('budgets.html')
         template_vals = {'user':user, 'budgets':budgets, 'items':items, 'length':length, 'totalSaved':totalSaved, 'logout_url':logout_url}
         self.response.write(template.render(template_vals))
 
+    def post(self):
+        current_user = users.get_current_user()
+        email = current_user.email()
+        user = User.query(User.email == email).get()
+        user_key = user.key
+
+        current_budgets = Budget.query(Budget.user_key==user.key)
+        for budget in current_budgets:
+            budget.key.delete()
+
+        self.redirect('/history')
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
