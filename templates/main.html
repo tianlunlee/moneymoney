@@ -15,13 +15,13 @@
     height: inherit;
     margin-left: 10%;
     font-family: sans-serif;
+    background: rgba(255, 255, 255, 0.3);
 
-    opacity: ;
     margin-top: auto;
     padding-left: .1%;
     padding-right: .1%;
     padding-top: .5%;
-    padding-bottom: 10%;
+    padding-bottom: 30%;
 
 
   }
@@ -29,7 +29,7 @@
     width: 100%;
     margin-top: -2%;
     padding-top: 1%;
-
+    background: rgba(192, 192, 192, 0.5);
 
   }
   #logo{
@@ -118,10 +118,11 @@
       font-weight: bold;
       border: 2px solid lightgray;
       width: 100px;
-
+      color: red;
 
     }
     #add_button:hover{
+
       background-color: gray;
       color: white;
     }
@@ -136,6 +137,7 @@
     }
     #top_date{
       margin-left: 32%;
+      margin-right: 32%;
     }
     #b_name{
       font-weight: normal;
@@ -163,7 +165,37 @@
     #left_over_amount{
       font-size: 20px;
     }
+    #info_table {
+      border: 3px solid black;
+      width: 90%;
 
+
+    }
+
+    .info_th {
+      border-right: 2px solid black;
+      background: rgba(192, 192, 192, 0.5);
+
+    }
+
+    .info_td {
+      border-top: 2px solid black;
+      border-right: 2px solid black;
+    }
+    #add_box{
+      border-top: none;
+      border-right: none;
+      
+    }
+    tr{
+      border-right: 2px solid black;
+
+    }
+    input{
+      width: 80%;
+      height: 55%;
+
+    }
 
 
   </style>
@@ -179,7 +211,7 @@
           <li><a href="/addbudget">Create New Budget</a></li>
           <li><a href="/budgets">View Previous Budgets</a></li>
           <li><a href="{{user.history_url()}}">View All History</a></li>
-          <li><form action="/"><a class="button" id="out" href="{{logout_url}}">Log Out</a></form></li>
+          <li style="float: right"><form action="/"><a class="button" id="out" href="{{logout_url}}">Log Out</a></form></li>
         </ul>
 
     </div>
@@ -199,7 +231,11 @@
       <div class="name">{{budgets[0].source_name}}</div>
       {% else %}
       <div class="name">No Budget!</div>
+
       {% endif %}
+      <br>
+      <br>
+
       </th>
       </tr>
 
@@ -210,11 +246,15 @@
       <th>
       <div class="name" id="b_name">Start Date:</div>
       {% if budgets[0] %}
-      <div class="name">{{budgets[0].date}}</div>
+      <div class="name" style="margin-right: 9px;">{{budgets[0].date}}</div>
       {% else %}
       <div class="name">No Budget!</div>
       {% endif %}
+<<<<<<< HEAD
+
+=======
       &nbsp;
+>>>>>>> b2f465ec7a1e1b0a75bff2e3bd5969064f566ac3
       <div class="name" id="b_name">End Date:</div>
       {% if budgets[0] %}
       <div class="name">{{budgets[0].end_date}}</div>
@@ -226,8 +266,12 @@
 
     </table>
 
+<<<<<<< HEAD
+    {% if countdown.year<=0 and countdown.month<=0 and countdown.day<=0 %}
+=======
     <br>
     {% if countdown.days<=0 %}
+>>>>>>> b2f465ec7a1e1b0a75bff2e3bd5969064f566ac3
     <h2 style="text-align: center; align-items: center; color:red"> Please create a new budget.<br>
     {% else %}
     <h2 style="text-align: center; align-items: center;">
@@ -240,7 +284,7 @@
     <div id="current_budget">
     Your Set Budget:
     {% if budgets[0] %}
-      {{budgets[0].amount}}
+      ${{budgets[0].amount}}
     {% else %}
       No Budget!
     {% endif %}
@@ -256,28 +300,28 @@
 
     <div>
       <form action='/' method='post'>
-        <table width="90%">
+        <table width="90%" id="info_table">
         <div >
           <tr id="first_row">
-            <th class="graph" >Note: </th>
-            <th class="graph" >Item/Service: </th>
-            <th class="graph" >Cost: </th>
-            <th class="graph" >New Balance: </th>
+            <th class="info_th" >Note: </th>
+            <th class="info_th" >Item/Service: </th>
+            <th class="info_th" >Cost: </th>
+            <th class="info_th" >New Balance: </th>
           </tr>
         </div>
           <tr>
-            <td>
+            <td class="info_td">
               <input name='note' placeholder='eg. date'>
             </td>
-            <td>
+            <td class="info_td">
               <input name='name' placeholder='Item/Service eg.Rent, Bills'>
             </td>
-            <td>
+            <td class="info_td">
               <input name='cost' placeholder='Cost'>
             </td>
-            <td>
+            <td class="info_td">
             </td>
-            <td>
+            <td class="info_td" id="add_box">
 
               <p><input type="submit" value="Add" id="add_button"> </p>
 
@@ -325,7 +369,7 @@
             {% if budgets[0] and items[0] %}
             <div class="name"> ${{budgets[0].amount - items[0].remaining_balance}}</div>
             {% else %}
-            <div class="name">None Spent!</div>
+            <div class="name">Nothing Spent!</div>
             {% endif %}
 
           </td>

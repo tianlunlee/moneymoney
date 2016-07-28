@@ -139,6 +139,7 @@ class MainHandler(webapp2.RequestHandler):
             cost = float(cost)
         else: # otherwise set it to 0
             cost = 0
+        cost = round(Decimal(cost), 2)
         item_name = self.request.get('name')
         if not item:
             remaining_balance = budget.amount - cost
@@ -255,7 +256,7 @@ class HistoryHandler(webapp2.RequestHandler):
 
         #delete
 
-class OldBudgetHangler(webapp2.RequestHandler):
+class OldBudgetHandler(webapp2.RequestHandler):
     def get(self):
         current_user = users.get_current_user()
         email = current_user.email()
@@ -299,9 +300,72 @@ class OldBudgetHangler(webapp2.RequestHandler):
             budget.key.delete()
         self.redirect('/history')
 
+class ModifyBudgetHandler(webapp2.RequestHandler):
+    def get(self):
+        current_user = users.get_current_user()
+        email = current_user.email()
+        user = User.query(User.email == email).get()
+        user_key = user.key
+
+        logout_url = users.CreateLogoutURL('/')
+        urlsafe_key = self.request.get('key')
+        key = ndb.Key(urlsafe=urlsafe_key)
+
+        budget = key.get()
+        items= Item.query(Item.budget_key == budget.key).order(-Item.datetime).fetch()
+        item_length = len(items)
+
+        user_date = user.date
+        budget_date = budget.end_date
+        budget_split = budget_date.rsplit('/')
+        end_date = date(int(budget_split[2]), int(budget_split[0]), int(budget_split[1]))
+        countdown = end_date - user_date
+
+        template = jinja_environment.get_template('modifybudget.html')
+        template_vals = {'budget':budget, 'logout_url':logout_url, 'countdown':countdown, 'items':items, 'urlsafe_key':urlsafe_key, 'item_length':item_length, 'user':user}
+
+
+        self.response.write(template.render(template_vals))
+    def post(self):
+        current_user = users.get_current_user()
+        email = current_user.email()
+        user = User.query(User.email == email).get()
+        user_key = user.key
+
+
+        urlsafe_key = self.request.get('key')
+        print
+        print
+        print urlsafe_key
+        key = ndb.Key(urlsafe=urlsafe_key)
+
+        budget = key.get()
+        item = Item.query(Item.budget_key == budget.key).order(-Item.datetime).get()
+
+        note = self.request.get('note')
+        cost = self.request.get('cost')
+        if cost: # if nonempty, convert to float
+            cost = float(cost)
+        else: # otherwise set it to 0
+            cost = 0
+        cost = round(Decimal(cost), 2)
+        item_name = self.request.get('name')
+        if not item:
+            remaining_balance = budget.amount - cost
+        else:
+            remaining_balance = item.remaining_balance - cost
+
+        remaining_balance = round(Decimal(remaining_balance), 2)
+            # interact with db
+        new_item = Item(item_name=item_name, cost=cost, note=note, budget_key=budget.key, remaining_balance=remaining_balance,user_key=user.key)
+        new_item.put()
+
+        self.redirect('/modifybudget?key={}'.format(urlsafe_key))
+
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
     ('/history', HistoryHandler),
     ('/addbudget', BudgetHandler),
-    ('/budgets', OldBudgetHangler)
+    ('/budgets', OldBudgetHandler),
+    ('/modifybudget', ModifyBudgetHandler)
 ], debug=True)
