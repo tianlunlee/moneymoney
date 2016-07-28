@@ -53,8 +53,6 @@ class Item(ndb.Model):
 
 
 
-
-
 class PastBudget(ndb.Model):
     source_name = ndb.StringProperty()
     user_key = ndb.KeyProperty(kind=User)
@@ -240,12 +238,16 @@ class HistoryHandler(webapp2.RequestHandler):
         self.response.write(template.render(template_vals))
 
     def post(self):
+        current_user = users.get_current_user()
+        email = current_user.email()
+        user = User.query(User.email == email).get()
+        user_key = user.key
 
+        current_items = Item.query(Item.user_key==user.key)
+        for item in current_items:
+            item.key.delete()
 
-        user = users.get_current_user()
-
-        Item.delete(Item.query(Item.user_key==user.key))
-        self.redirect('/')
+        self.redirect('/history')
 
         #delete
 
@@ -274,16 +276,26 @@ class OldBudgetHangler(webapp2.RequestHandler):
             else:
                 totalSaved += budget.amount
 
-
-
-
-
-
-
         template = jinja_environment.get_template('budgets.html')
         template_vals = {'user':user, 'budgets':budgets, 'items':items, 'length':length, 'totalSaved':totalSaved, 'logout_url':logout_url}
         self.response.write(template.render(template_vals))
 
+    def post(self):
+        current_user = users.get_current_user()
+        email = current_user.email()
+        user = User.query(User.email == email).get()
+        user_key = user.key
+
+        current_budgets = Budget.query(Budget.user_key==user.key)
+
+        for budget in current_budgets:
+            items = Item.query(Item.budget_key==budget.key).fetch()
+            if items:
+                for item in items:
+                    item.key.delete()
+            budget.key.delete()
+
+        self.redirect('/history')
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
