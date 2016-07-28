@@ -287,7 +287,12 @@ class OldBudgetHangler(webapp2.RequestHandler):
         user_key = user.key
 
         current_budgets = Budget.query(Budget.user_key==user.key)
+
         for budget in current_budgets:
+            items = Item.query(Item.budget_key==budget.key).fetch()
+            if items:
+                for item in items:
+                    item.key.delete()
             budget.key.delete()
 
         self.redirect('/history')
