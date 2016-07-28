@@ -307,6 +307,7 @@
                   <p><input type="submit" value="Add" id="add_button"> </p>
                 </td>
               </tr>
+            </form>
 
               {% for i in range(0,item_length) %}
 
@@ -327,11 +328,13 @@
                         <td>
                       {% endif %}
                           {{items[i].remaining_balance}}</td>
+                        <form action='/deleteitem?key={{budget.key.urlsafe()}}&amp;key2={{items[i].key.urlsafe()}}' method='post'>
+                        <td><input type="submit" name="key" value="Delete"></td>
+                        </form>
                   {% endif %}
                   {% endfor %}
                 </tr>
             </table>
-          </form>
         </div>
       </div>
     </body>

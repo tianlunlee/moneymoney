@@ -154,6 +154,35 @@ class MainHandler(webapp2.RequestHandler):
         self.redirect('/')
 
 
+class DeleteHandler(webapp2.RequestHandler):
+    def post(self):
+        item_safekey = self.request.get('key')
+        ndb.Key(urlsafe=item_safekey).delete()
+
+        self.redirect('/')
+
+class DeleteHandler2(webapp2.RequestHandler):
+    def post(self):
+        item_safekey = self.request.get('key2')
+        ndb.Key(urlsafe=item_safekey).delete()
+
+
+        urlsafe_key = self.request.get('key')
+        print
+        print
+        print urlsafe_key
+        key = ndb.Key(urlsafe=urlsafe_key)
+
+        self.redirect('/modifybudget?key={}'.format(urlsafe_key))
+
+
+
+
+
+
+
+
+
 
 class BudgetHandler(webapp2.RequestHandler):
 
@@ -310,9 +339,10 @@ class ModifyBudgetHandler(webapp2.RequestHandler):
         logout_url = users.CreateLogoutURL('/')
         urlsafe_key = self.request.get('key')
         key = ndb.Key(urlsafe=urlsafe_key)
-
+        print urlsafe_key + "URL"
+        print key
         budget = key.get()
-        items= Item.query(Item.budget_key == budget.key).order(-Item.datetime).fetch()
+        items= Item.query(Item.budget_key == key).order(-Item.datetime).fetch()
         item_length = len(items)
 
 
@@ -369,5 +399,7 @@ app = webapp2.WSGIApplication([
     ('/history', HistoryHandler),
     ('/addbudget', BudgetHandler),
     ('/budgets', OldBudgetHandler),
+    ('/delete', DeleteHandler),
+    ('/deleteitem', DeleteHandler2),
     ('/modifybudget', ModifyBudgetHandler)
 ], debug=True)
