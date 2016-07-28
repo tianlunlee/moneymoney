@@ -173,11 +173,11 @@
         </tr>
 
         {% for i in range(0,length) %}
-        {%if i%2==0 %}
-          <tr style="background-color:lightgray">
-        {% else %}
-          <tr>
-        {% endif %}
+          {%if i%2==0 %}
+            <tr style="background-color:lightgray">
+          {% else %}
+            <tr>
+          {% endif %}
             <td><a id="link" href="/modifybudget?key={{budgets[i].key.urlsafe()}}">{{budgets[i].source_name}}</a></td>
             <td>{{budgets[i].date}}</td>
             <td>{{budgets[i].end_date}}</td>
@@ -191,11 +191,14 @@
               {% else %}
                 <td>
               {% endif %}
-                ${{items[i][0].remaining_balance}}</td>
+                ${{items[i][0].remaining_balance}}
             {% else %}
               <td>0</td>
               <td>${{budgets[i].amount}}</td>
             {% endif %}
+            <form action='/deletebudget?key={{budgets[i].key.urlsafe()}}' method='post'>
+            <td><input type="submit" name="key" value="Delete"></td>
+            </form>
             {% endfor %}
           </tr>
       </table>
