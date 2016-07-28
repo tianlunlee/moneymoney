@@ -226,12 +226,12 @@
     </table>
 
     <br>
-    {% if countdown.year<=0 and countdown.month<=0 and countdown.day<=0 %}
+    {% if countdown.days<=0 %}
     <h2 style="text-align: center; align-items: center; color:red"> Please create a new budget.<br>
     {% else %}
     <h2 style="text-align: center; align-items: center;">
     {% endif %}
-    {{countdown.year}} Year(s) {{countdown.month}} Month(s) {{countdown.day}} Day(s) Remaining</h2>
+    {{countdown.days}} Day(s) Remaining</h2>
 
     <br>
     <br>

@@ -5,8 +5,9 @@ import jinja2
 import logging
 import webapp2
 import os
-import datetime
 
+import datetime
+from datetime import date
 template_dir = os.path.join(os.path.dirname(__file__), 'templates')
 jinja_environment = jinja2.Environment(
   loader=jinja2.FileSystemLoader(template_dir))
@@ -90,15 +91,15 @@ class MainHandler(webapp2.RequestHandler):
 
                 user_date = user.date
                 budget_date = budgets[0].end_date
+                budget_split = budget_date.rsplit('/')
+                end_date = date(int(budget_split[2]), int(budget_split[0]), int(budget_split[1]))
 
-                budget_split = str(budget_date).rsplit('/')
-                print budget_split
-                # calculates the difference between the budget end date and the current date
-                month = int(budget_split[0]) - int(user_date.month)
-                day = int(budget_split[1]) - int(user_date.day)
-                year = int(budget_split[2]) - int(user_date.year)
+                # month = int(budget_split[0]) - int(user_date.month)
+                # day = int(budget_split[1]) - int(user_date.day)
+                # year = int(budget_split[2]) - int(user_date.year)
 
-                countdown = {'year':year, 'month':month, 'day':day}
+                # countdown = {'year':year, 'month':month, 'day':day}
+                countdown = end_date - user_date
                 print countdown
                 template_vals = {'user':user, 'logout_url':logout_url, 'items':items, 'budgets':budgets,
                 'countdown':countdown
