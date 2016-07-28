@@ -331,7 +331,7 @@ class OldBudgetHandler(webapp2.RequestHandler):
                 for item in items:
                     item.key.delete()
             budget.key.delete()
-        self.redirect('/history')
+        self.redirect('/budgets')
 
 class ModifyBudgetHandler(webapp2.RequestHandler):
     def get(self):

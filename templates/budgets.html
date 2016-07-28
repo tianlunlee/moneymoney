@@ -95,7 +95,7 @@
         margin-right:auto;
     }
     #total_saved{
-      margin-right: 10%;
+      text-align: center;
 
     }
     #add_button{
@@ -128,7 +128,7 @@
     #view:hover{
       background-color: darkgreen;
     }
-  
+
 
   </style>
 
@@ -155,13 +155,11 @@
     <br>
 
     {% if totalSaved <= 0%}
-    <h2 style="float:right; color:red;">
+    <h2 id="total_saved" style="color:red;">
     {% else %}
-    <h2 style="float:right" id="total_saved">
+    <h2 id="total_saved">
     {% endif %}
     Total saved lifetime: ${{totalSaved}}</h2>
-    <br>
-    <br>
     <br>
     <br>
     <br>
