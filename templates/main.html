@@ -345,7 +345,7 @@
                   {% else %}
                     <td>
                   {% endif %}
-                      {{items[i].remaining_balance}}</td>
+                      ${{items[i].remaining_balance}}</td>
                     <form action='/delete?key={{items[i].key.urlsafe()}}' method='post'>
                     <td><input type="submit" name="key" value="Delete"></td>
                     </form>

@@ -106,7 +106,7 @@
     }
     #current_budget{
       font-size: 25px;
-      font-weight: bold;
+      font-weight:;
       text-align: center;
       padding-bottom: -5%;
     }
@@ -176,6 +176,10 @@
       margin-top: -2%;
       padding-top: 1%;
       background: rgba(192, 192, 192, 0.5);}
+    #center_table{
+      margin-left: 5%;
+      margin-right: 5%;
+    }
 
 
 
@@ -295,7 +299,7 @@
   <body class="center">
       <div>
         <form action='/modifybudget?key={{urlsafe_key}}' method='post'>
-          <table width="90%">
+          <table width="90%" id="center_table">
             <div >
               <tr id="first_row">
                 <th class="graph" >Note: </th>
@@ -330,7 +334,7 @@
                     {% endif %}
                         <td>{{items[i].note}}</td>
                         <td>{{items[i].item_name}}</td>
-                        <td>{{items[i].cost}}</td>
+                        <td>${{items[i].cost}}</td>
                       {% if items[i].remaining_balance/budget.amount <= 0.2 %}
                         <td style="color:red">
                       {% elif items[i].remaining_balance/budget.amount <= 0.5 %}
@@ -338,7 +342,7 @@
                       {% else %}
                         <td>
                       {% endif %}
-                          {{items[i].remaining_balance}}</td>
+                          ${{items[i].remaining_balance}}</td>
                         <form action='/deleteitem?key={{budget.key.urlsafe()}}&amp;key2={{items[i].key.urlsafe()}}' method='post'>
                         <td><input type="submit" name="key" value="Delete"></td>
                         </form>
