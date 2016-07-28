@@ -6,21 +6,30 @@
   </head>
   <style>
   html {
+    background-image: url(/images/back.jpg);
 
-    background-color: white;
   }
   body{
+
     width:80%;
+    height: inherit;
     margin-left: 10%;
     font-family: sans-serif;
-    background-color: #F1F1F1;
-    margin-top: -.9%;
+
+    opacity: ;
+    margin-top: auto;
+    padding-left: .1%;
+    padding-right: .1%;
+    padding-top: .5%;
     padding-bottom: 10%;
 
 
   }
   #header {
     width: 100%;
+    margin-top: -2%;
+    padding-top: 1%;
+
 
   }
   #logo{
@@ -55,7 +64,7 @@
       margin: 0;
       padding: 0;
       overflow: hidden;
-      background-color: #333;
+      background-color: gray;
     }
 
     li {
@@ -97,15 +106,64 @@
       font-size: 25px;
       font-weight: bold;
       text-align: center;
+      padding-bottom: -5%;
     }
     #hello {
       margin-left: 5%;
 
     }
+    #add_button{
+      background-color: white;
+      font-size: 13px;
+      font-weight: bold;
+      border: 2px solid lightgray;
+      width: 100px;
+
+
+    }
+    #add_button:hover{
+      background-color: gray;
+      color: white;
+    }
+
     #first_row{
       border: 2px solid black;
 
     }
+    #bottom {
+      margin-left: 25%;
+
+    }
+    #top_date{
+      margin-left: 32%;
+    }
+    #b_name{
+      font-weight: normal;
+      font-size: 20px;
+
+    }
+    .name{
+      display: inline-block;
+      font-size: 20px;
+    }
+    #planned_title{
+
+      display: inline-block;
+      margin-left: -20%;
+    }
+    #actual_title{
+      display: inline-block;
+      margin-left: -30%;
+      margin-right: 1%;
+    }
+    #left_over{
+      color: white;
+
+    }
+    #left_over_amount{
+      font-size: 20px;
+    }
+
 
 
   </style>
@@ -132,7 +190,40 @@
 
 
     <h3 id="hello"> Hello {{user.username}},</h3>
+  <div id="center_all">
+    <table id="top_date">
+      <tr>
+      <th>
+      <div class="name" id="b_name">Budget Name:</div>
+      {% if budgets[0] %}
+      <div class="name">{{budgets[0].source_name}}</div>
+      {% else %}
+      <div class="name">No Budget!</div>
+      {% endif %}
+      </th>
+      </tr>
 
+
+
+      <tr>
+
+      <th>
+      <div class="name" id="b_name">Start Date:</div>
+      {% if budgets[0] %}
+      <div class="name">{{budgets[0].date}}</div>
+      {% else %}
+      <div class="name">No Budget!</div>
+      {% endif %}
+      <div class="name" id="b_name">End Date:</div>
+      {% if budgets[0] %}
+      <div class="name">{{budgets[0].end_date}}</div>
+      {% else %}
+      <div class="name">No Budget!</div>
+      {% endif %}
+      </th>
+      </tr>
+
+    </table>
 
     <br>
     {% if countdown.year<=0 and countdown.month<=0 and countdown.day<=0 %}
@@ -146,7 +237,7 @@
     <br>
 
     <div id="current_budget">
-    Your Current Budget:
+    Your Set Budget:
     {% if budgets[0] %}
       {{budgets[0].amount}}
     {% else %}
@@ -165,13 +256,14 @@
     <div>
       <form action='/' method='post'>
         <table width="90%">
+        <div >
           <tr id="first_row">
             <th class="graph" >Note: </th>
             <th class="graph" >Item/Service: </th>
             <th class="graph" >Cost: </th>
             <th class="graph" >New Balance: </th>
           </tr>
-
+        </div>
           <tr>
             <td>
               <input name='note' placeholder='eg. date'>
@@ -185,7 +277,9 @@
             <td>
             </td>
             <td>
-              <p><input type="submit" value="Add"></p>
+
+              <p><input type="submit" value="Add" id="add_button"> </p>
+
             </td>
           </tr>
 
@@ -217,71 +311,43 @@
   </div>
     <br>
     <br>
-    <div>
-      <table class = "budget" width = 25%>
+    <div id="bottom">
+      <table class = "budget" >
         <tr>
-          <th class = "budget">
-            Planned
-          </th>
-          <th class = "budget">
-            Actual
-          </th>
-        </tr>
 
-        <tr>
-          <td class = "budget">
-            <br>
-            Name:
-            {% if budgets[0] %}
-            {{budgets[0].source_name}}
-            {% else %}
-            No Budget!
-            {% endif %}
-            <br>
-            <br>
-            Start Date:
-            {% if budgets[0] %}
-            {{budgets[0].date}}
-            {% else %}
-            No Budget!
-            {% endif %}
-            End Date:
-            {% if budgets[0] %}
-            {{budgets[0].end_date}}
-            {% else %}
-            No Budget!
-            {% endif %}
-            <br>
-            <br>
-            To Spend:
-            {% if budgets[0] %}
-            {{budgets[0].amount}}
-            {% else %}
-            No Budget!
-            {% endif %}
-          </td>
+          <td class = "bottom_part">
+            <div id="actual_title">
+              <div class="name" id="b_name"><b>Total Amount Spent:</b></div>
+            </div>
 
-          <td class = "budget">
-            Amount Spent:
+
             {% if budgets[0] and items[0] %}
-              {{budgets[0].amount - items[0].remaining_balance}}
+            <div class="name"> ${{budgets[0].amount - items[0].remaining_balance}}</div>
             {% else %}
-              None Spent!
+            <div class="name">None Spent!</div>
             {% endif %}
+
           </td>
+
+
+            <td class="name">
+
+            <b class="name">Balance Left Over:</b>
+
+            {% if budgets[0] and items[0] %}
+            <div class="name"> ${{items[0].remaining_balance}}</div>
+            {% else %}
+            <div class="name">None Spent!</div>
+            {% endif %}
+            </td>
+
+
+
+
         </tr>
       </table>
     </div>
-
-
-
-
-
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
+  </div>
 
 
   </body>
