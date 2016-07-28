@@ -240,8 +240,12 @@ class HistoryHandler(webapp2.RequestHandler):
         self.response.write(template.render(template_vals))
 
     def post(self):
+
+
         user = users.get_current_user()
+
         Item.delete(Item.query(Item.user_key==user.key))
+        self.redirect('/')
 
         #delete
 
