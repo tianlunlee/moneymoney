@@ -196,6 +196,13 @@
       height: 55%;
 
     }
+    #out:hover{
+      background-color: darkred;
+
+    }
+    #home:hover{
+      background-color: darkgreen;
+    }
 
 
   </style>
@@ -207,7 +214,7 @@
 
         <h1 id="logo_text"><img src="/images/logo.png" id="logo_image"></img>College Student Finances</h1>
         <ul>
-          <li><a class="active" href="/">Home</a></li>
+          <li><a class="active" href="/" id="home">Home</a></li>
           <li><a href="/addbudget">Create New Budget</a></li>
           <li><a href="/budgets">View Previous Budgets</a></li>
           <li><a href="{{user.history_url()}}">View All History</a></li>
@@ -303,13 +310,13 @@
         </div>
           <tr>
             <td class="info_td">
-              <input name='note' placeholder='eg. date'>
+              <input name='note' placeholder='eg. date' required>
             </td>
             <td class="info_td">
-              <input name='name' placeholder='Item/Service eg.Rent, Bills'>
+              <input name='name' placeholder='Item/Service eg.Rent, Bills' required>
             </td>
             <td class="info_td">
-              <input name='cost' placeholder='Cost'>
+              <input name='cost' placeholder='Cost' type="number" required>
             </td>
             <td class="info_td">
             </td>
@@ -330,7 +337,7 @@
                 {% endif %}
                     <td>{{items[i].note}}</td>
                     <td>{{items[i].item_name}}</td>
-                    <td>{{items[i].cost}}</td>
+                    <td>${{items[i].cost}}</td>
                   {% if items[i].remaining_balance/budgets[0].amount <= 0.2 %}
                     <td style="color:red">
                   {% elif items[i].remaining_balance/budgets[0].amount <= 0.5 %}
@@ -342,6 +349,7 @@
                     <form action='/delete?key={{items[i].key.urlsafe()}}' method='post'>
                     <td><input type="submit" name="key" value="Delete"></td>
                     </form>
+
               {% endif %}
               {% endfor %}
             </tr>

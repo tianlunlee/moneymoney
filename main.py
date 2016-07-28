@@ -168,12 +168,16 @@ class DeleteHandler2(webapp2.RequestHandler):
 
 
         urlsafe_key = self.request.get('key')
-        print
-        print
-        print urlsafe_key
         key = ndb.Key(urlsafe=urlsafe_key)
 
         self.redirect('/modifybudget?key={}'.format(urlsafe_key))
+
+class DeleteHandler3(webapp2.RequestHandler):
+    def post(self):
+        budget_safekey = self.request.get('key')
+        ndb.Key(urlsafe=budget_safekey).delete()
+
+        self.redirect('/budgets')
 
 
 
@@ -401,5 +405,6 @@ app = webapp2.WSGIApplication([
     ('/budgets', OldBudgetHandler),
     ('/delete', DeleteHandler),
     ('/deleteitem', DeleteHandler2),
+    ('/deletebudget', DeleteHandler3),
     ('/modifybudget', ModifyBudgetHandler)
 ], debug=True)
