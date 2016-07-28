@@ -141,11 +141,7 @@
     <br>
     <br>
     <div>
-      <form style="float:right;" action='/history' method='post'>
 
-        <br>
-        <br>
-      </form>
       <table class="center" width = 75%>
         <tr>
           <th>Note: </th>
@@ -183,7 +179,9 @@
             {% endif %}
         {% endfor %}
               </table>
-        <h3><input type="submit" value="Clear All" id="add_button"></h3>
+        <form style="float:right;" action='/history' method='post'>
+          <h3><input type="submit" value="Clear All" id="add_button"></h3>
+        </form>
     </div>
     <br>
   </body>
