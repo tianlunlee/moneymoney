@@ -196,6 +196,13 @@
       height: 55%;
 
     }
+    #out:hover{
+      background-color: darkred;
+
+    }
+    #home:hover{
+      background-color: darkgreen;
+    }
 
 
   </style>
@@ -207,7 +214,7 @@
 
         <h1 id="logo_text"><img src="/images/logo.png" id="logo_image"></img>College Student Finances</h1>
         <ul>
-          <li><a class="active" href="/">Home</a></li>
+          <li><a class="active" href="/" id="home">Home</a></li>
           <li><a href="/addbudget">Create New Budget</a></li>
           <li><a href="/budgets">View Previous Budgets</a></li>
           <li><a href="{{user.history_url()}}">View All History</a></li>
