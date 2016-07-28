@@ -45,6 +45,7 @@ class Item(ndb.Model):
     item_name = ndb.StringProperty()
     cost = ndb.FloatProperty()
     note = ndb.StringProperty()
+    user_key = ndb.KeyProperty(kind=User)
     budget_key = ndb.KeyProperty(kind=Budget)
     remaining_balance = ndb.FloatProperty()
     datetime = ndb.DateTimeProperty(auto_now_add = True)
@@ -144,7 +145,7 @@ class MainHandler(webapp2.RequestHandler):
             remaining_balance = item.remaining_balance - cost
 
             # interact with db
-        new_item = Item(item_name=item_name, cost=cost, note=note, budget_key=budget.key, remaining_balance=remaining_balance)
+        new_item = Item(item_name=item_name, cost=cost, note=note, budget_key=budget.key, remaining_balance=remaining_balance,user_key=user.key)
         new_item.put()
             # render
         self.redirect('/')
@@ -238,6 +239,11 @@ class HistoryHandler(webapp2.RequestHandler):
         template_vals = {'user':user, 'items':items, 'budgets':budgets, 'length':length, 'logout_url':logout_url}
         self.response.write(template.render(template_vals))
 
+    def post(self):
+        user = users.get_current_user()
+        Item.delete(Item.query(Item.user_key==user.key))
+
+        #delete
 
 class OldBudgetHangler(webapp2.RequestHandler):
     def get(self):
