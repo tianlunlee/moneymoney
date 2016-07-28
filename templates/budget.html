@@ -161,9 +161,11 @@
 
 }
 #home:hover{
+  background-color: ;
+}
+#create:hover{
   background-color: darkgreen;
 }
-
 
   </style>
   <body>
@@ -173,7 +175,7 @@
         <h1 id="logo_text"><img src="/images/logo.png" id="logo_image"></img>College Student Finances</h1>
         <ul>
           <li><a href="/" id="home">Home</a></li>
-          <li><a href="/addbudget" class="active">Create New Budget</a></li>
+          <li><a href="/addbudget" class="active" id="create">Create New Budget</a></li>
           <li><a href="/budgets">View Previous Budgets</a></li>
           <li><a href="{{user.history_url()}}">View All History</a></li>
           <li style="float: right"><form action="/"><a class="button" id="out" href="{{logout_url}}">Log Out</a></form></li>
