@@ -1,5 +1,5 @@
-application: moneymoney-1383
-version: 4
+application: collegestudentfinances
+version: 1
 runtime: python27
 api_version: 1
 threadsafe: yes
