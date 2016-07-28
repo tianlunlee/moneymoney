@@ -7,22 +7,27 @@
 
   <style>
   html{
-
+    background-image: url(/images/back.jpg);
 
 
   }
   body{
 
-    background-image: url(/images/back.jpg);
+
     width:80%;
     margin-left: 10%;
     margin-right: 10%;
     font-family: sans-serif;
+    background: rgba(255, 255, 255, 0.3);
+    padding-bottom: 50%;
 
 
   }
   #header {
     width: 100%;
+    margin-top: -2%;
+    padding-top: 1%;
+    background: rgba(192, 192, 192, 0.5);
 
   }
   #logo{
@@ -44,24 +49,29 @@
   }
 
   table {
-    border: 5px solid black;
-    width: 100%;
+    border: 3px solid black;
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
 
   }
 
-  tr {
-    border: 2px solid black;
-  }
+
 
   th {
-    border: 2px solid black;
+    border-right: 2px solid black;
+    background: rgba(192, 192, 192, 0.5);
+
   }
 
   td {
-    border: 2px solid black;
+    border-top: 2px solid black;
+    border-right: 2px solid black;
   }
   .inline {
-    margin-left: 30%;
+    margin-left: 9%;
+    width: 80%;
+    height: 60%;
   }
 
   #title {
@@ -73,6 +83,7 @@
     background-clip: text;
     color: transparent;
     text-shadow: rgba(255,255,255,0.5) 0px 3px 3px;
+    margin-bottom: 6%;
 
 
   }
@@ -125,6 +136,27 @@
   -moz-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, .5);
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, .5);
 }
+#add_button{
+  background-color: white;
+  font-size: 13px;
+  font-weight: bold;
+  border: 2px solid lightgray;
+  width: 100px;
+  color: red;
+  margin-left: 20%;
+
+}
+#add_button:hover{
+
+  background-color: gray;
+  color: white;
+}
+#add_box{
+  border-top: none;
+  border-right: none;
+
+}
+
 
   </style>
   <body>
@@ -137,7 +169,7 @@
           <li><a href="/addbudget">Create New Budget</a></li>
           <li><a href="/budgets">View Previous Budgets</a></li>
           <li><a href="{{user.history_url()}}">View All History</a></li>
-          <li><form action="/"><a class="button" id="out" href="{{logout_url}}">Log Out</a></form></li>
+          <li style="float: right"><form action="/"><a class="button" id="out" href="{{logout_url}}">Log Out</a></form></li>
         </ul>
 
     </div>
@@ -154,7 +186,7 @@
 
     <div>
       <form action='/addbudget' method='post'>
-        <table class="center" width = 75%>
+        <table class="center" width = 70%>
           <tr>
             <th>Start Date: </th>
             <th>End Date: </th>
@@ -176,9 +208,9 @@
             <td>
               <input name='amount' class="inline" placeholder='Amount'>
             </td>
-            <td>
+            <td id="add_box">
               <!-- line below creates a button that allows submission -->
-              <p><input type="submit" value="Add"> </p>
+              <p><input type="submit" value="Add" id="add_button"> </p>
             </td>
           </tr>
         </table>
