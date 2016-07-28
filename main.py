@@ -285,7 +285,6 @@ class OldBudgetHangler(webapp2.RequestHandler):
         email = current_user.email()
         user = User.query(User.email == email).get()
         user_key = user.key
-
         current_budgets = Budget.query(Budget.user_key==user.key)
 
         for budget in current_budgets:
@@ -294,7 +293,6 @@ class OldBudgetHangler(webapp2.RequestHandler):
                 for item in items:
                     item.key.delete()
             budget.key.delete()
-
         self.redirect('/history')
 
 app = webapp2.WSGIApplication([
