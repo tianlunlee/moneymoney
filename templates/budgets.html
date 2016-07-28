@@ -13,11 +13,16 @@
     margin-left: 10%;
     margin-right: 10%;
     font-family: sans-serif;
+    background: rgba(255, 255, 255, 0.3);
+    padding-bottom: 40%;
 
 
   }
   #header {
     width: 100%;
+    margin-top: -2%;
+    padding-top: 1%;
+    background: rgba(192, 192, 192, 0.5);
 
   }
   #logo{
@@ -89,8 +94,25 @@
         margin-left:auto;
         margin-right:auto;
     }
+    #total_saved{
+      margin-right: 10%;
 
+    }
+    #add_button{
+      background-color: white;
+      font-size: 13px;
+      font-weight: bold;
+      border: 2px solid lightgray;
+      width: 100px;
+      color: red;
+      margin-right: 60px;
 
+    }
+    #add_button:hover{
+
+      background-color: gray;
+      color: white;
+    }
 
 
   </style>
@@ -107,7 +129,7 @@
           <li><a href="/addbudget">Create New Budget</a></li>
           <li><a href="/budgets">View Previous Budgets</a></li>
           <li><a href="{{user.history_url()}}">View All History</a></li>
-          <li><form action="/"><a class="button" id="out" href="{{logout_url}}">Log Out</a></form></li>
+          <li style="float: right"><form action="/"><a class="button" id="out" href="{{logout_url}}">Log Out</a></form></li>
         </ul>
 
     </div>
@@ -116,30 +138,25 @@
 
 
     <br>
-    <br>
+
     {% if totalSaved <= 0%}
     <h2 style="float:right; color:red;">
     {% else %}
-    <h2 style="float:right">
+    <h2 style="float:right" id="total_saved">
     {% endif %}
-    Total saved lifetime: {{totalSaved}}</h2>
+    Total saved lifetime: ${{totalSaved}}</h2>
     <br>
     <br>
     <br>
     <br>
     <br>
     <div>
-      <form style="float:right;" action='/budgets' method='post'>
-        <h3><input type="submit" value="Clear All"></h3>
-        <br>
-        <br>
-      </form>
-      <table class="center" width = 75%>
+      <table class="center" width = 90%>
         <tr>
           <th>Name: </th>
           <th>Start Date: </th>
           <th>End Date: </th>
-          <th>To Spend: </th>
+          <th>Budget To Spend: </th>
           <th>Amount Spent: </th>
           <th>Remained: </th>
         </tr>
@@ -153,9 +170,9 @@
             <td>{{budgets[i].source_name}}</td>
             <td>{{budgets[i].date}}</td>
             <td>{{budgets[i].end_date}}</td>
-            <td>{{budgets[i].amount}}</td>
+            <td>${{budgets[i].amount}}</td>
             {% if items[i][0] %}
-            <td>{{budgets[i].amount-items[i][0].remaining_balance}}</td>
+            <td>${{budgets[i].amount-items[i][0].remaining_balance}}</td>
               {% if items[i][0].remaining_balance <= 0 %}
                 <td style="color:red">
               {% elif items[i][0].remaining_balance <= 5%}
@@ -163,14 +180,19 @@
               {% else %}
                 <td>
               {% endif %}
-                {{items[i][0].remaining_balance}}</td>
+                ${{items[i][0].remaining_balance}}</td>
             {% else %}
               <td>0</td>
-              <td>{{budgets[i].amount}}</td>
+              <td>${{budgets[i].amount}}</td>
             {% endif %}
             {% endfor %}
           </tr>
       </table>
+      <form style="float:right;" action='/budgets' method='post'>
+        <h3><input type="submit" value="Clear All" id="add_button"></h3>
+        <br>
+        <br>
+      </form>
     </div>
     <br>
   </body>
