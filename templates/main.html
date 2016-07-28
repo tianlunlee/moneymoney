@@ -251,8 +251,6 @@
       <div class="name">No Budget!</div>
       {% endif %}
 
-      &nbsp;
-
       <div class="name" id="b_name">End Date:</div>
       {% if budgets[0] %}
       <div class="name">{{budgets[0].end_date}}</div>
@@ -266,7 +264,6 @@
 
     <br>
     {% if countdown.days<=0 %}
-
     <h2 style="text-align: center; align-items: center; color:red"> Please create a new budget.<br>
     {% else %}
     <h2 style="text-align: center; align-items: center;">
@@ -384,7 +381,7 @@
               {% endif %}
                   ${{items[0].remaining_balance}}</div>
             {% else %}
-            <div class="name">None Spent!</div>
+              <div class="name">None Spent!</div>
             {% endif %}
             </td>
 
