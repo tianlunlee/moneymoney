@@ -53,8 +53,6 @@ class Item(ndb.Model):
 
 
 
-
-
 class PastBudget(ndb.Model):
     source_name = ndb.StringProperty()
     user_key = ndb.KeyProperty(kind=User)
@@ -240,8 +238,16 @@ class HistoryHandler(webapp2.RequestHandler):
         self.response.write(template.render(template_vals))
 
     def post(self):
-        user = users.get_current_user()
-        Item.delete(Item.query(Item.user_key==user.key))
+        current_user = users.get_current_user()
+        email = current_user.email()
+        user = User.query(User.email == email).get()
+        user_key = user.key
+
+        current_items = Item.query(Item.user_key==user.key)
+        for item in current_items:
+            item.key.delete()
+
+        self.redirect('/history')
 
         #delete
 
