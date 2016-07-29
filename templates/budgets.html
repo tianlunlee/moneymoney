@@ -96,6 +96,7 @@
     }
     #total_saved{
       text-align: center;
+      font-size: 25px;
 
     }
     #add_button{
@@ -128,6 +129,15 @@
     #view:hover{
       background-color: darkgreen;
     }
+    table{
+      border: 2px solid black;
+    }
+    .under{
+      border-bottom: 2px solid black;
+      border-right: 2px solid black;
+      background: rgba(255, 255, 255, 0.5);
+    }
+
 
 
   </style>
@@ -157,21 +167,21 @@
     {% if totalSaved <= 0%}
     <h2 id="total_saved" style="color:red;">
     {% else %}
-    <h2 id="total_saved">
+    <div id="total_saved">
     {% endif %}
-    Total saved lifetime: ${{totalSaved}}</h2>
+    <b>Total saved lifetime:</b> ${{totalSaved}}</div>
     <br>
     <br>
     <br>
     <div>
       <table class="center" width = 90%>
         <tr>
-          <th>Name: </th>
-          <th>Start Date: </th>
-          <th>End Date: </th>
-          <th>Budget To Spend: </th>
-          <th>Amount Spent: </th>
-          <th>Remained: </th>
+          <th class="under">Name: </th>
+          <th class="under">Start Date: </th>
+          <th class="under">End Date: </th>
+          <th class="under">Budget To Spend: </th>
+          <th class="under">Amount Spent: </th>
+          <th class="under">Remained: </th>
         </tr>
 
         {% for i in range(0,length) %}
