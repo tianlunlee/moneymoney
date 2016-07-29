@@ -21,7 +21,7 @@
     padding-left: .1%;
     padding-right: .1%;
     padding-top: .5%;
-    padding-bottom: 30%;
+    padding-bottom: 5%;
 
 
   }
@@ -99,7 +99,7 @@
 
     #first_table{
       text-align: center;
-      margin-left: 12%;
+      margin-left: 13%;
 
     }
     #current_budget{
@@ -215,7 +215,7 @@
     #tip_img{
       width: 560px;
       height: 370px;
-      margin-left: 17%;
+      margin-left: 19%;
       padding: 5px 5px 5px 5px;
     }
     #heade{
@@ -225,7 +225,7 @@
     }
     #vid{
       margin-top: 5%;
-      background: rgba(255, 255, 255, 0.7);
+      background: rgba(255, 255, 255, 1);
       width: 80%;
       margin-left: 10%;
       margin-right: 10%;
@@ -235,7 +235,7 @@
     }
     #white{
       margin-top: 0%;
-      background: rgba(255, 255, 255, 0.7);
+      background: rgba(255, 255, 255, 1);
       width: 80%;
       margin-left: 10%;
       margin-right: 10%;
@@ -426,10 +426,12 @@
             {% if budgets[0] and items[0] %}
 
               {% if items[0].remaining_balance/budgets[0].amount <= 0.2 %}
-                <div class="name" style="color:red"></div>
+                <div class="name" style="color:red">
               {% elif items[0].remaining_balance/budgets[0].amount <= 0.5 %}
-                <div class="name" style="color:orange"></div>
+                </div>
+                <div class="name" style="color:orange">
               {% else %}
+                </div>
                 <div class="name">
               {% endif %}
                   ${{items[0].remaining_balance}}</div>

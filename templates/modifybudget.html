@@ -148,6 +148,10 @@
       display: inline-block;
       font-size: 20px;
     }
+    .name1{
+      display: inline-block;
+      font-size: 25px;
+    }
     #planned_title{
 
       display: inline-block;
@@ -265,30 +269,28 @@
 
 
     <div class="center">
-      <b id="current_budget">
+      <div id="current_budget">
       Your Set Budget:
       {% if budget %}
-        ${{budget.amount}}
+        <b class="name1" >${{budget.amount}}</b>
       {% else %}
-        No Budget!
+        <b class="name1">No Budget!</b>
       {% endif %}
-      </b>
+    </div>
 
-      <br>
-
-      <b class="name" id="current_budget">Balance Left Over:</b>
+      <div class="name" id="current_budget">Balance Left Over:</div>
 
       {% if budget and items[0] %}
         {% if items[0].remaining_balance/budget.amount <= 0.2 %}
-          <b class="name" style="color:red">
+          <b class="name1" style="color:red">
         {% elif items[0].remaining_balance/budget.amount <= 0.5 %}
-          <b class="name" style="color:orange">
+          <b class="name1" style="color:orange">
         {% else %}
-          <b class="name">
+          <b class="name"1>
         {% endif %}
             ${{items[0].remaining_balance}}</b>
       {% else %}
-      <b class="name">None Spent!</b>
+      <b class="name1">None Spent!</b>
       {% endif %}
     </div>
   </div>
