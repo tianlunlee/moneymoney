@@ -19,7 +19,7 @@
     margin-right: 10%;
     font-family: sans-serif;
     background: rgba(255, 255, 255, 0.3);
-    padding-bottom: 50%;
+    padding-bottom: 5%;
 
 
   }
@@ -82,8 +82,8 @@
     -moz-background-clip: text;
     background-clip: text;
     color: transparent;
-    text-shadow: rgba(255,255,255,0.5) 0px 3px 3px;
-    margin-bottom: 6%;
+    text-shadow: rgba(192,192,192,0.2) 0px 3px 3px;
+    margin-bottom: 2%;
 
 
   }
@@ -161,14 +161,64 @@
 
 }
 #home:hover{
-  background-color: ;
+  background-color: darkgreen;
 }
 #create:hover{
   background-color: darkgreen;
 }
+#bud{
+  margin-left: 38%;
+  margin-right: 40%;
+  background-color: white;
+  padding: 15px 15px 15px 15px;
+  margin-bottom: 10%;
+}
+#why {
+margin-left: 7%;
+}
+#whole_why{
+  float: left;
+  width: 50%;
+  height: inherit;
+  background: rgba(192, 192, 192, 0.1);
+  margin-left: 25%;
+  margin-right: -30%;
+  margin-top: 50%;
+
+}
+#ex_img{
+  float:left;
+  margin-top: 50%;
+
+}
+#here{
+  margin-left: 23%;
+}
+
+iframe{
+  margin-left: 20%;
+  padding: 5px 5px 5px 5px;
+}
+#heade{
+
+  text-align: center;
+
+}
+#vid{
+  margin-top: 5%;
+  background: rgba(255, 255, 255, 0.9);
+  width: 80%;
+  margin-left: 10%;
+  margin-right: 10%;
+  padding-bottom: 5%;
+  padding-top: 3%;
+
+}
+
 
   </style>
   <body>
+
 
     <div id="header">
 
@@ -193,6 +243,11 @@
 
       <h1 id="title">Create Budget</h1>
 
+    <br>
+
+
+
+
     <div>
       <form action='/addbudget' method='post'>
         <table class="center" width = 70%>
@@ -200,7 +255,7 @@
             <th>Start Date: </th>
             <th>End Date: </th>
             <th>Name: </th>
-            <th>Amount: </th>
+            <th>Income Amount: </th>
 
           </tr>
 
@@ -224,10 +279,16 @@
           </tr>
         </table>
       </form>
+
     </div>
+    <br>
+    <br>
 
-
-
+    <div id="vid">
+      <h3 id='heade'>Need Help Creating a Budget?</h3>
+      <h4 id="heade">Watch this useful video!</h4>
+      <iframe id="actual" width="560" height="315" src="https://www.youtube.com/embed/Rs8P0Eh7Zbc" frameborder="0" allowfullscreen></iframe>
+    </div>
 
 
 
