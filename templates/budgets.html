@@ -165,7 +165,7 @@
     <br>
 
     {% if totalSaved <= 0%}
-    <h2 id="total_saved" style="color:red;">
+    <div id="total_saved" style="color:red;">
     {% else %}
     <div id="total_saved">
     {% endif %}
@@ -203,7 +203,7 @@
               {% else %}
                 <td>
               {% endif %}
-                ${{items[i][0].remaining_balance}}
+                ${{items[i][0].remaining_balance}}</td>
             {% else %}
               <td>0</td>
               <td>${{budgets[i].amount}}</td>
