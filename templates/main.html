@@ -94,7 +94,7 @@
       -moz-background-clip: text;
       background-clip: text;
       color: transparent;
-      text-shadow: rgba(255,255,255,0.5) 0px 3px 3px;
+      text-shadow: rgba(192,192,192,0.2) 0px 3px 3px;
     }
 
     #first_table{
@@ -143,6 +143,7 @@
       font-weight: normal;
       font-size: 20px;
 
+
     }
     .name{
       display: inline-block;
@@ -168,7 +169,8 @@
     #info_table {
       border: 3px solid black;
       border-bottom: none;
-      width: 90%;
+      width: 105%;
+      margin-left: -10%;
 
 
     }
@@ -209,6 +211,39 @@
       text-align: center;
       margin-top: 5%;
 
+    }
+    #tip_img{
+      width: 560px;
+      height: 370px;
+      margin-left: 17%;
+      padding: 5px 5px 5px 5px;
+    }
+    #heade{
+
+      text-align: center;
+
+    }
+    #vid{
+      margin-top: 5%;
+      background: rgba(255, 255, 255, 0.7);
+      width: 80%;
+      margin-left: 10%;
+      margin-right: 10%;
+      padding-bottom: 5%;
+      padding-top: 3%;
+
+    }
+    #white{
+      margin-top: 0%;
+      background: rgba(255, 255, 255, 0.7);
+      width: 80%;
+      margin-left: 10%;
+      margin-right: 10%;
+      padding-bottom: 5%;
+      padding-top: 3%;
+    }
+    #balance{
+      margin-left: -20%;
     }
 
 
@@ -286,7 +321,7 @@
 
     <br>
     <br>
-
+<div id="white">
     <div id="current_budget">
     Your Set Budget:
     {% if budgets[0] %}
@@ -386,20 +421,20 @@
 
             <td class="name">
 
-            <b class="name">Balance Left Over:</b>
+            <b class="name" id="balance">Balance Left Over:</b>
 
             {% if budgets[0] and items[0] %}
 
               {% if items[0].remaining_balance/budgets[0].amount <= 0.2 %}
-                <div class="name" style="color:red">
+                <div class="name" style="color:red"></div>
               {% elif items[0].remaining_balance/budgets[0].amount <= 0.5 %}
-                <div class="name" style="color:orange">
+                <div class="name" style="color:orange"></div>
               {% else %}
                 <div class="name">
               {% endif %}
                   ${{items[0].remaining_balance}}</div>
             {% else %}
-              <div class="name">Nothing Leftover!</div>
+              <div class="name">Nothing Spent!</div>
             {% endif %}
             </td>
 
@@ -409,6 +444,11 @@
         </tr>
       </table>
     </div>
+</div>
+  <div id="vid">
+    <h2 id='heade'>Tip Of The Week</h2>
+    <h4 id="heade"></h4>
+    <img id="tip_img" src="/images/financial.jpg" ></img>
   </div>
 
 
